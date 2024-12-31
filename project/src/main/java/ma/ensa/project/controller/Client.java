@@ -35,6 +35,13 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Client{
 
+    @FXML
+    public Button userbtn;
+    public Button clientbtn;
+    public Button produitbtn;
+    public Button commandebtn;
+    public Button paiementbtn;
+    public Button facturnbtn;
 
 
     @Data
