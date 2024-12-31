@@ -470,6 +470,18 @@ public class Client{
         }
 
     }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        ma.ensa.project.controller.commande commande1= new ma.ensa.project.controller.commande();
+
+        commande1.initialize(vbox.getScene());
+
+        this.clientTable.getScene().getWindow().hide();
+
+
+
+
+    }
     @FXML
     public void initialize(Scene scene) throws IOException, SQLException {
 

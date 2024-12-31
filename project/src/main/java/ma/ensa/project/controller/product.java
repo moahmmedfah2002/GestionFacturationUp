@@ -193,11 +193,22 @@ public class product {
 
 
     }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        commande commande = new commande();
+
+        commande.initialize(vbox.getScene());
+
+        this.produitTable.getScene().getWindow().hide();
+
+
+
+    }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Client.Update.etat=false;
-        facture facture = new facture();
+        Client client = new Client();
 
-        facture.initialize(vbox.getScene());
+        client.initialize(vbox.getScene());
 
         this.produitTable.getScene().getWindow().hide();
 
