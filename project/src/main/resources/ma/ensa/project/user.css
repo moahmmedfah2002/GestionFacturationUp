@@ -1,0 +1,54 @@
+
+.sc{
+    -fx-hgap: 20px;
+    -fx-padding: 40px;
+
+    -fx-background-color: #2969c0;
+    -fx-background-radius: 50px;
+
+    -fx-border-radius: 50px;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+
+}
+.root{
+
+    -fx-background-image: url("images/backJ.jpg");
+    -fx-background-size: cover;
+
+
+}
+/*.button{*/
+/*    -fx-background-color:*/
+/*            linear-gradient(#f0ff35, #a9ff00),*/
+/*            radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);*/
+/*    -fx-background-radius: 6, 5;*/
+/*    -fx-background-insets: 0, 1;*/
+/*    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );*/
+/*    -fx-text-fill: #395306;*/
+/*    -fx-start-margin: 10px;*/
+
+/*}*/
+
+.plane{
+    -fx-background-radius: 5;
+    -fx-border-radius: 30;
+    -fx-border-width:5;
+
+}
+.bac{
+
+   -fx-background-image: url("images/logo.jpg");
+    -fx-background-size: cover;
+    -fx-background-radius: 50px;
+
+
+
+    -fx-border-radius: 50px;
+    -fx-border-width: 5px;
+
+
+}
+.full{
+    -fx-background-color: transparent;
+}

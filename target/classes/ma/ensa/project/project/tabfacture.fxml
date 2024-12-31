@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="634.0" style="-fx-background-color: #d3bac4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.facture">
+    <children>
+
+        <TableView accessibleRole="BUTTON" layoutX="16.0" layoutY="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="607.0">
+            <columns>
+                <TableColumn fx:id="num" prefWidth="85.0" text="Num Facture" />
+                <TableColumn fx:id="date" prefWidth="48.0" text="Date" />
+                <TableColumn fx:id="nom" prefWidth="90.0" text="Nom client" />
+                <TableColumn fx:id="HT" prefWidth="99.0" text="Montant HT" />
+                <TableColumn fx:id="TTC" prefWidth="84.0" text="Montant TTC" />
+                <TableColumn fx:id="ech" prefWidth="98.0" text="Date d'echeance" />
+                <TableColumn fx:id="Etat" prefWidth="33.0" text="Etat" />
+                <TableColumn fx:id="plus" prefWidth="66.0" text="Plus" />
+            </columns>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </TableView>
+
+        <Line endX="307.0" layoutX="318.0" layoutY="128.0" opacity="0.33" startX="-310.0" />
+        <Line endX="513.0" layoutX="109.0" layoutY="428.0" opacity="0.42" startX="-100.0" />
+        <VBox layoutX="121.0" layoutY="99.0" prefHeight="77.0" prefWidth="634.0" />
+      <Button contentDisplay="LEFT" layoutX="91.0" layoutY="463.0" prefHeight="28.0" prefWidth="79.0" text="ADD">
+         <graphic>
+            <ImageView fitHeight="20" fitWidth="21.0">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button contentDisplay="LEFT" layoutX="222.0" layoutY="463.0" text="update">
+         <graphic>
+            <ImageView fitHeight="20" fitWidth="21.0">
+               <image>
+                  <Image url="@images/update.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button contentDisplay="LEFT" layoutX="364.0" layoutY="463.0" text="delete">
+         <graphic>
+            <ImageView fitHeight="20" fitWidth="21.0">
+               <image>
+                  <Image url="@images/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button contentDisplay="LEFT" layoutX="497.0" layoutY="463.0" text="close"  onAction="#Close">
+         <graphic>
+            <ImageView fitHeight="20" fitWidth="21.0">
+               <image>
+                  <Image url="@images/close2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+          <Text layoutX="210.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualisation Des Factures" wrappingWidth="381.62890625">
+              <font>
+                  <Font name="System Bold" size="29.0" />
+              </font>
+          </Text>
+      <ImageView fitHeight="91.0" fitWidth="164.0" layoutX="85.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/invoice.png" />
+         </image>
+      </ImageView>
+
+
+
+    </children>
+</AnchorPane>

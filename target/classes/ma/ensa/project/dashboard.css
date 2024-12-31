@@ -1,0 +1,350 @@
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.sidebar {
+    -fx-background-color: #2c3e50;
+    -fx-min-width: 250px;
+    -fx-padding: 20px 10px;
+    -fx-spacing: 10px;
+}
+
+.dashboard-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-padding: 0 0 20px 0;
+    -fx-alignment: center;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-min-width: 230px;
+    -fx-padding: 15px;
+    -fx-alignment: center-left;
+}
+
+.nav-button:hover {
+    -fx-background-color: #34495e;
+}
+
+.content-area {
+    -fx-padding: 30;
+    -fx-background-color: #F0F2F5;
+}
+
+.table-header {
+    -fx-padding: 0 0 20 0;
+    -fx-spacing: 15;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.section-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E293B;
+}
+
+.add-button {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+}
+
+.add-button:hover {
+    -fx-background-color: #2ecc71;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-min-height: 300px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+}
+/* Style 1 : Design Moderne et Minimaliste */
+.delete-btn {
+    -fx-background-color: #FF4757;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.delete-btn:hover {
+    -fx-background-color: #FF6B81;
+    -fx-effect: dropshadow(gaussian, rgba(255, 71, 87, 0.3), 8, 0, 0, 0);
+}
+
+/* Style 2 : Design avec Bordure */
+.delete-btn-outlined {
+    -fx-background-color: transparent;
+    -fx-border-color: #FF4757;
+    -fx-border-width: 1.5;
+    -fx-text-fill: #FF4757;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+}
+
+.delete-btn-outlined:hover {
+    -fx-background-color: #FFF1F3;
+    -fx-effect: dropshadow(gaussian, rgba(255, 71, 87, 0.2), 8, 0, 0, 0);
+}
+
+/* Style 3 : Design Soft avec Icône */
+.delete-btn-soft {
+    -fx-background-color: #FFE9EC;
+    -fx-text-fill: #FF4757;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-graphic: url('trash-icon.png'); /* Ajoutez votre icône */
+    -fx-content-display: LEFT;
+    -fx-graphic-text-gap: 8;
+}
+
+.delete-btn-soft:hover {
+    -fx-background-color: #FFD4DA;
+}
+
+/* Style 4 : Design Circulaire */
+.delete-btn-circle {
+    -fx-background-color: #FF4757;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-background-radius: 20;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER;
+}
+
+.delete-btn-circle:hover {
+    -fx-background-color: #FF6B81;
+    -fx-effect: dropshadow(gaussian, rgba(255, 71, 87, 0.4), 10, 0, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Style 5 : Design avec Animation */
+.delete-btn-animated {
+    -fx-background-color: #FF4757;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+.custom-alert {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-background-radius: 10;
+}
+
+.custom-alert .alert-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2D3436;
+}
+
+.custom-alert .alert-message {
+    -fx-font-size: 14px;
+    -fx-text-fill: #636E72;
+}
+
+.alert-cancel-btn {
+    -fx-background-color: #EDF1F7;
+    -fx-text-fill: #2D3436;
+    -fx-font-size: 14px;
+    -fx-padding: 8 20;
+    -fx-background-radius: 5;
+}
+
+.alert-delete-btn {
+    -fx-background-color: #FF4757;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8 20;
+    -fx-background-radius: 5;
+}
+
+.alert-cancel-btn:hover {
+    -fx-background-color: #E4E9F2;
+}
+
+.alert-delete-btn:hover {
+    -fx-background-color: #FF6B81;
+}
+
+.delete-btn-animated:hover {
+    -fx-background-color: #FF6B81;
+    -fx-effect: dropshadow(gaussian, rgba(255, 71, 87, 0.3), 8, 0, 0, 0);
+    -fx-translate-y: -2;
+}
+.table-view .table-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: #ecf0f1;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #f5f6fa;
+}
+
+.edit-button {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+}
+
+.edit-button:hover {
+    -fx-background-color: #f1c40f;
+}
+
+.delete-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+}
+
+.delete-button:hover {
+    -fx-background-color: #c0392b;
+}
+
+.table-view .edit-button {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-min-width: 80px;
+}
+
+.table-view .edit-button:hover {
+    -fx-background-color: #f1c40f;
+}
+
+.table-view .delete-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-min-width: 80px;
+}
+
+.table-view .delete-button:hover {
+    -fx-background-color: #c0392b;
+}
+
+/* Make the buttons in table slightly smaller */
+.table-view .button {
+    -fx-font-size: 11px;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Center align the actions column */
+.table-view .table-column:last-visible {
+    -fx-alignment: CENTER;
+}
+
+/* Stats Cards */
+.stats-container {
+    -fx-spacing: 20;
+}
+
+.stat-card {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-pref-width: 250;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 0);
+}
+
+.stat-label {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 14px;
+}
+
+.stat-value {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E293B;
+    -fx-padding: 5 0;
+}
+
+.stat-trend {
+    -fx-text-fill: #10B981;
+    -fx-font-size: 13px;
+}
+
+/* Status Cells */
+.status-cell {
+    -fx-padding: 5 10;
+    -fx-background-radius: 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+.status-active {
+    -fx-background-color: #DCFCE7;
+    -fx-text-fill: #15803D;
+}
+
+.status-inactive {
+    -fx-background-color: #FEF2F2;
+    -fx-text-fill: #991B1B;
+}
+
+.status-pending {
+    -fx-background-color: #FEF3C7;
+    -fx-text-fill: #92400E;
+}
+
+/* Empty Table Message */
+.empty-table-label {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 14px;
+}
+
+/* Table Row Styling */
+.table-row-cell {
+    -fx-cell-size: 50px;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #F8FAFC;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #EFF6FF;
+}
+
+/* Action Buttons Container */
+.actions-container {
+    -fx-spacing: 8;
+    -fx-alignment: CENTER_LEFT;
+}

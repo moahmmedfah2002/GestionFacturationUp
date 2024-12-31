@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.home">
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="164.0" prefWidth="204.0" spacing="10" style="-fx-padding: 10; -fx-background-color: #d3bac4;">
+            <Button onAction="#showClient" prefHeight="135.0" prefWidth="148.0">
+                <graphic>
+                    <VBox alignment="CENTER" prefHeight="116.0" prefWidth="109.0" spacing="5">
+                        <ImageView fx:id="clientIcon" fitHeight="150.0" fitWidth="100.0" preserveRatio="true">
+                            <image>
+                                <Image url="@images/text_13132533.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="Client">
+                     <font>
+                        <Font size="21.0" />
+                     </font></Label>
+                    </VBox>
+                </graphic>
+            </Button>
+            <Button onAction="#showfacture" prefHeight="135.0" prefWidth="148.0">
+                <graphic>
+                    <VBox alignment="CENTER" prefHeight="116.0" prefWidth="109.0" spacing="5">
+                        <ImageView fx:id="invoice" fitHeight="150.0" fitWidth="100.0" preserveRatio="true">
+                            <image>
+                                <Image url="@images/invoice.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="invoice">
+                            <font>
+                                <Font size="21.0" />
+                            </font></Label>
+                    </VBox>
+                </graphic>
+            </Button>
+            <Button onAction="#showproduct" prefHeight="135.0" prefWidth="148.0">
+                <graphic>
+                    <VBox alignment="CENTER" prefHeight="116.0" prefWidth="109.0" spacing="5">
+                        <ImageView fx:id="product" fitHeight="150.0" fitWidth="100.0" preserveRatio="true">
+                            <image>
+                                <Image url="@images/cubes.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="Products">
+                            <font>
+                                <Font size="21.0" />
+                            </font></Label>
+                    </VBox>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+    <center>
+        <StackPane fx:id="contentPane" style="-fx-background-image: url('/ma/ensa/project/images/home.png');-fx-background-size: cover;
+                  -fx-background-repeat: no-repeat;" />
+    </center>
+</BorderPane>

@@ -1,0 +1,7 @@
+ma\ensa\project\entity\Commande.class
+ma\ensa\project\repo\CommandeRepo.class
+module-info.class
+ma\ensa\project\entity\DetaileCommande.class
+ma\ensa\project\controller\Client.class
+ma\ensa\project\entity\Client.class
+ma\ensa\project\repo\ClientRepo.class

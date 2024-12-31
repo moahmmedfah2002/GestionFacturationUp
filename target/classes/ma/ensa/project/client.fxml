@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="634.0" style="-fx-background-color: #d3bac4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.Client">
+   <children>
+      <TableView accessibleRole="BUTTON" layoutX="129.0" layoutY="159.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="376.0">
+         <columns>
+            <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="contact" prefWidth="75.0" text="ContactNo" />
+            <TableColumn fx:id="address" prefWidth="75.0" text="Address" />
+            <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="gender" prefWidth="75.0" text="Gender" />
+         </columns>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TableView>
+      <ImageView fitHeight="86.0" fitWidth="68.0" layoutX="167.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/text_13132533.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="258.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clients details" wrappingWidth="213.62890625">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Button contentDisplay="LEFT" layoutX="101.0" layoutY="463.0" prefHeight="28.0" prefWidth="79.0" text="ADD">
+         <graphic>
+            <ImageView fitHeight="20" fitWidth="21.0">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+
+      <Line endX="307.0" layoutX="318.0" layoutY="128.0" opacity="0.33" startX="-310.0" />
+      <Line endX="513.0" layoutX="109.0" layoutY="428.0" opacity="0.42" startX="-100.0" />
+      <Button contentDisplay="LEFT" layoutX="210.0" layoutY="463.0" text="update">
+         <graphic>
+            <ImageView fitHeight="20" fitWidth="21.0">
+               <image>
+                  <Image url="@images/update.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button contentDisplay="LEFT" layoutX="338.0" layoutY="463.0" text="delete">
+         <graphic>
+            <ImageView fitHeight="20" fitWidth="21.0">
+               <image>
+                  <Image url="@images/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button contentDisplay="LEFT" layoutX="458.0" layoutY="463.0" text="close" onAction="#Close">
+         <graphic>
+            <ImageView fitHeight="20" fitWidth="21.0">
+               <image>
+                  <Image url="@images/close2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
