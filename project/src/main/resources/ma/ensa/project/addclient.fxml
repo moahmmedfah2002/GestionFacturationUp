@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+
+<BorderPane stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.addclient">
+
+    <left>
+        <VBox prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
+            <children>
+                <Label styleClass="dashboard-title" text="Client" />
+                <Button styleClass="nav-button" text="Users"/>
+                <Button styleClass="nav-button" text="Clients" />
+                <Button styleClass="nav-button" text="Produits"  />
+                <Button styleClass="nav-button" text="Commandes" />
+                <Button styleClass="nav-button" text="Paiements" />
+                <Button styleClass="nav-button" text="Factures"  />
+                <VBox prefHeight="50.0" prefWidth="100.0" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20.0" styleClass="form-container">
+            <children>
+                <Label text="Add Client Details" styleClass="form-title" />
+                <GridPane hgap="10" vgap="10" alignment="CENTER">
+                    <children>
+                        <Label text="Nom Client:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                        <TextField fx:id="Nom" promptText="Enter client name" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                        <Label text="Address:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                        <TextField fx:id="Address" promptText="Enter address" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                        <Label text="Email:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                        <TextField fx:id="Email" promptText="Enter email" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                        <Label text="Telephone:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                        <TextField fx:id="Telephone" promptText="Enter telephone number" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <HBox alignment="CENTER" spacing="15">
+                    <children>
+                        <Button text="Save" styleClass="form-button" onAction="#save"/>
+                        <Button text="Cancel"  styleClass="form-button" onAction="#cancel"/>
+                        <Label fx:id="label" text="" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+
+    <top>
+        <Pane prefHeight="48.0" styleClass="sidebar">
+            <children>
+                <HBox prefHeight="50.0">
+                    <children>
+                        <VBox prefHeight="50.0" prefWidth="1111.0" />
+                        <VBox prefHeight="100.0" prefWidth="65.0">
+                            <children>
+                                <Button fx:id="btnClose" mnemonicParsing="false"  onAction="#close" prefHeight="49.0" prefWidth="48.0" style="-fx-background-color: none;" textAlignment="CENTER">
+                                    <graphic>
+                                        <ImageView fitHeight="28.0" fitWidth="32.0" opacity="0.63" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/close.png" />
+                                            </image>
+                                            <effect>
+                                                <Shadow color="#ff0000ac" height="1.0" radius="0.0" width="0.0" />
+                                            </effect>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="100.0" prefWidth="46.0">
+                            <children>
+                                <Button fx:id="btnFull" mnemonicParsing="false" onAction="#full" prefHeight="52.0" prefWidth="51.0" style="-fx-background-color: none;">
+                                    <graphic>
+                                        <ImageView fitHeight="30.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/full.png" />
+                                            </image>
+                                            <effect>
+                                                <Shadow color="#0e80c280" height="0.0" radius="0.0" width="0.0" />
+                                            </effect>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </Pane>
+    </top>
+
+</BorderPane>

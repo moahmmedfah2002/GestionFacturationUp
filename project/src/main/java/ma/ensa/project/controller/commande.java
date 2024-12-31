@@ -53,7 +53,9 @@ public class commande {
         private String clientname="";
         private Button delete;
         private Button update;
+        private Button detailscommande;
         private Boolean s;
+
         // Constructeur
         public CommandeModel(String id, Object c, Object to, Object cli,Object us,Object st) throws SQLException {
 
@@ -75,6 +77,8 @@ public class commande {
 
             this.delete=new Button("Delete");
             this.delete.setId(id);
+            this.detailscommande=new Button("details commande");
+            this.detailscommande.setId(id);
             this.delete.setStyle("-fx-background-color: #ae2727;\n" +
                     "    -fx-text-fill: white;\n" +
                     "    -fx-padding: 5px 10px;");
@@ -89,6 +93,7 @@ public class commande {
             statu.getItems().add(true);
             statu.getItems().add(false);
             statu.setValue((Boolean) st);
+
             this.update.setOnAction(event -> {
 
 
@@ -240,6 +245,8 @@ public class commande {
     private JFXTreeTableColumn<CommandeModel, Button> DeleteColumn=new JFXTreeTableColumn<>("delete");
     @FXML
     private JFXTreeTableColumn<CommandeModel, Button> updateColumn=new JFXTreeTableColumn<>("update");
+    @FXML
+    private JFXTreeTableColumn<CommandeModel, Button> detailsColumn=new JFXTreeTableColumn<>("details");
 
     private static CommandeService commandeDao;
     public commande() throws SQLException, ClassNotFoundException, IOException {
@@ -289,6 +296,7 @@ public class commande {
         commandeTable.getColumns().add(status);
         commandeTable.getColumns().add(DeleteColumn);
         commandeTable.getColumns().add(updateColumn);
+        commandeTable.getColumns().add(detailsColumn);
         commandeTable.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
 
         update.start();
@@ -355,7 +363,7 @@ public class commande {
                         client.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getCl()));
                         DeleteColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getDelete()));
                         updateColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getUpdate()));
-
+                        detailsColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getDetailscommande()));
 
 
 

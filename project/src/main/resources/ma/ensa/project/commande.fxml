@@ -85,6 +85,9 @@
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
     -fx-background-color: transparent; /* Optional: Removes background */
     -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="updateColumn" text="update"/>
+                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
+    -fx-background-color: transparent; /* Optional: Removes background */
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="detailsColumn" text="details"/>
 
                         </columns>
                         <placeholder>

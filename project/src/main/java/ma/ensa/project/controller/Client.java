@@ -157,6 +157,7 @@ public class Client{
     public VBox vbox= new VBox();
 
     @FXML
+
     public JFXTreeTableView<ClientModel> clientTable= new JFXTreeTableView<>();
     @FXML
     public JFXTreeTableColumn<ClientModel, Object> nom= new JFXTreeTableColumn<>("nom");
@@ -180,7 +181,17 @@ public class Client{
 
     private static ClientService clientDao;
 
+    public void addclient(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
 
+        addclient addclient= new addclient();
+
+        addclient.initialize(vbox.getScene());
+
+        this.clientTable.getScene().getWindow().hide();
+
+
+
+    }
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
         DashboardUser user = new DashboardUser();
