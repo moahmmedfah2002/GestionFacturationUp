@@ -225,7 +225,7 @@ public class Client{
         Update.etat=false;
         facture facture = new facture();
 
-        facture.initialize(vbox.getScene());
+        facture.initialize(new Stage());
 
         this.clientTable.getScene().getWindow().hide();
 

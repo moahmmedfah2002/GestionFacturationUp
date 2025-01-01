@@ -197,7 +197,7 @@ public class product {
         Client.Update.etat=false;
         facture facture = new facture();
 
-        facture.initialize(vbox.getScene());
+        facture.initialize(new Stage());
 
         this.produitTable.getScene().getWindow().hide();
 
