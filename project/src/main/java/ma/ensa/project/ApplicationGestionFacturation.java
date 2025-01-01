@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ma.ensa.project.controller.*;
+import ma.ensa.project.entity.Commande;
 import ma.ensa.project.entity.Role;
 
 import java.io.IOException;

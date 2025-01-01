@@ -50,10 +50,28 @@ public class CommandeService implements CommandeRepo {
 
 
     }
+    public List<Commande> getCommandebystatus(boolean status) throws SQLException {
+        List<Commande> commandes=new ArrayList<>();
+        PreparedStatement ps=con.prepareCall("SELECT * from commande where statuePaiement=?");
+        ps.setBoolean(1,status);
+        ResultSet rs=ps.executeQuery();
+        Commande commande=new Commande();
+        while(rs.next()){
+            commande.setId(rs.getInt("id"));
+            commande.setCommandeDate(rs.getDate("commandedate"));
+            commande.setTotalAmount(rs.getFloat("totalamount"));
+            commande.setIdUser(rs.getInt("idUser"));
+            commande.setStatus(rs.getBoolean("statuePaiement"));
+            commande.setClient(rs.getInt("idClient"));
+            commandes.add(commande);
+
+        }
+        return commandes;
+    }
 
     @Override
     public Commande getCommande(int id) throws SQLException {
-        PreparedStatement ps=con.prepareCall("SELECT * from commande where idCommande=?");
+        PreparedStatement ps=con.prepareCall("SELECT * from commande where id=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
         Commande commande=new Commande();
@@ -61,6 +79,8 @@ public class CommandeService implements CommandeRepo {
             commande.setId(rs.getInt("id"));
             commande.setCommandeDate(rs.getDate("commandedate"));
             commande.setTotalAmount(rs.getFloat("totalamount"));
+            commande.setIdUser(rs.getInt("idUser"));
+            commande.setStatus(rs.getBoolean("statuePaiement"));
             commande.setClient(rs.getInt("idClient"));
 
         }
@@ -103,6 +123,14 @@ public class CommandeService implements CommandeRepo {
         }else {
             return false;
         }
+    }
+    public void updateCommandepaiement(int id,int paiement) throws SQLException {
+        PreparedStatement ps=con.prepareCall("UPDATE commande set statuePaiement=? ,idPaiement=? where id=?");
+        ps.setInt(2,paiement);
+        ps.setInt(3,id);
+        ps.setBoolean(1,true);
+        ps.executeUpdate();
+
     }
 
     @Override
