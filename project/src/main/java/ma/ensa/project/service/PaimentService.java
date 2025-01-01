@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,23 +21,40 @@ public class PaimentService implements PaiementRepo {
         con=connexion.getCon();
     }
     @Override
-    public boolean addPaiement(Paiement paiement, User user) throws SQLException {
+    public Paiement addPaiement(Paiement paiement, User user) throws SQLException {
 
-        PreparedStatement ps=con.prepareCall("INSERT INTO Paiement(idCommande,date,idUser) values(?,?,?,?,?,?)");
-        ps.setInt(1,paiement.getCommandeId());
-        ps.setDate(3,paiement.getDate());
-        ps.setInt(4,paiement.getIdUser());
-        return ps.executeUpdate()!=0;
+        PreparedStatement ps = con.prepareCall("INSERT INTO paiement(date,idCommande,idUser) values(?,?,?)");
+
+        ps.setDate(1, paiement.getDate());
+        ps.setInt(2, paiement.getCommandeId());
+
+        ps.setInt(3, user.getId());
+        int rowsAffected = ps.executeUpdate();
+
+        if (rowsAffected > 0) {
+            // Retrieve generated keys
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int generatedId = rs.getInt(1); // Retrieve the generated key
+                    paiement.setId(generatedId);   // Set the ID to the Paiement object
+                }
+            }
+        } else {
+            throw new SQLException("Failed to insert Paiement. No rows affected.");
+        }
+
+
+    return paiement;
 
     }
 
 
     @Override
     public boolean updatePaiement(Paiement paiement) throws SQLException {
-        PreparedStatement ps=con.prepareCall("UPDATE Paiement set idCommande=?,date=? where id=?");
-        ps.setInt(1,paiement.getCommandeId());
-        ps.setDate(2,paiement.getDate());
-        ps.setInt(3,paiement.getId());
+        PreparedStatement ps=con.prepareCall("UPDATE Paiement set date=? where id=?");
+
+        ps.setDate(1,paiement.getDate());
+        ps.setInt(2,paiement.getId());
         return ps.executeUpdate()!=0;
 
     }

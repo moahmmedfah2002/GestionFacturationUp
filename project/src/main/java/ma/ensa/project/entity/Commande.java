@@ -9,6 +9,7 @@ public class Commande {
     private int client;
     private int idUser;
     private boolean status=false;
+    private int idpaiement;
 
     private List<Integer> detailCommande;
 
@@ -30,6 +31,14 @@ public class Commande {
         this.idUser = idUser;
         this.detailCommande = detailCommande;
         this.status =status ;
+    }
+
+    public int getIdpaiement() {
+        return idpaiement;
+    }
+
+    public void setIdpaiement(int idpaiement) {
+        this.idpaiement = idpaiement;
     }
 
     public boolean isStatus() {
