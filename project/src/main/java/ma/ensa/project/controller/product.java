@@ -170,6 +170,17 @@ public class product {
     private static ProduitService produitDao;
 
 
+    public void addproduct(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
+        addproduct add= new addproduct();
+
+        add.initialize(vbox.getScene());
+
+        this.produitTable.getScene().getWindow().hide();
+
+
+
+    }
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Client.Update.etat=false;
         DashboardUser user = new DashboardUser();

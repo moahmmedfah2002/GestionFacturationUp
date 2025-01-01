@@ -50,8 +50,8 @@
                         <children>
                             <Label styleClass="section-title" text="Liste Produit"/>
                             <Region HBox.hgrow="ALWAYS"/>
-                            <TextField promptText="🔍 Rechercher un utilisateur..." styleClass="search-field"/>
-                            <Button  styleClass="add-button">
+
+                            <Button  styleClass="add-button" onAction="#addproduct">
                                 <graphic>
                                     <HBox alignment="CENTER" spacing="5">
                                         <children>
