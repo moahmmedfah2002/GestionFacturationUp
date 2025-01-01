@@ -18,12 +18,23 @@
          <children>
             <Label styleClass="dashboard-title" text="Client" />
 
+<<<<<<< HEAD
             <Button styleClass="nav-button" text="Users"  onAction="#user" />
             <Button styleClass="nav-button" text="Clients" />
             <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
             <Button styleClass="nav-button" text="Commandes" onAction="#commande"  />
             <Button styleClass="nav-button" text="Paiements" />
             <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
+=======
+
+
+            <Button styleClass="nav-button" text="Users" fx:id="userbtn"  onAction="#user" />
+            <Button styleClass="nav-button" fx:id="clientbtn" text="Clients" />
+            <Button styleClass="nav-button" fx:id="produitbtn" text="Produits" onAction="#produit"/>
+            <Button styleClass="nav-button" fx:id="commandebtn" text="Commandes" onAction="#commande"/>
+            <Button styleClass="nav-button" fx:id="paiementbtn" text="Paiements" />
+            <Button styleClass="nav-button" fx:id="facturnbtn" text="Factures" onAction="#facture"/>
+>>>>>>> 0058744348349852d84cdb63b77c4d3c66962bca
 
             <VBox prefHeight="50.0" prefWidth="100.0" />
          </children>

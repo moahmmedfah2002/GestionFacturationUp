@@ -15,9 +15,11 @@
                 <Button styleClass="nav-button" text="Users"/>
                 <Button styleClass="nav-button" text="Clients" />
                 <Button styleClass="nav-button" text="Produits"  />
-                <Button styleClass="nav-button" text="Commandes" />
+                <Button styleClass="nav-button" text="Commandes" onAction="#commande"/>
                 <Button styleClass="nav-button" text="Paiements" />
                 <Button styleClass="nav-button" text="Factures"  />
+                <Button styleClass="nav-button" text="Cancel" onAction="#cancel"  />
+
                 <VBox prefHeight="50.0" prefWidth="100.0" />
             </children>
         </VBox>
@@ -26,7 +28,7 @@
     <center>
         <VBox alignment="CENTER" spacing="20.0" styleClass="form-container">
             <children>
-                <Label text="Add Client Details" styleClass="form-title" />
+                <Label text="Add product Details" styleClass="form-title" />
                 <GridPane hgap="10" vgap="10" alignment="CENTER">
                     <children>
                         <Label text="Nom Produit:" GridPane.rowIndex="0" GridPane.columnIndex="0" />

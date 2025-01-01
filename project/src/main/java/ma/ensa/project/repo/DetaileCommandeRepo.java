@@ -9,7 +9,8 @@ import java.util.List;
 public interface DetaileCommandeRepo {
     boolean addDetaileCommande(DetaileCommande detaileCommande) throws SQLException;
 
-    float SommeAvecTva(DetaileCommande detaileCommande) throws SQLException, ClassNotFoundException;
+
+    float SommeAvecTva(List<DetaileCommande> detaileCommande) throws SQLException, ClassNotFoundException;
 
     boolean updateDetaileCommande(DetaileCommande DetaileCommande) throws SQLException;
     boolean deleteDetaileCommande(int id) throws SQLException;

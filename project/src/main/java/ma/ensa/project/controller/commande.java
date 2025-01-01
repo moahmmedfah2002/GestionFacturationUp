@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.EventListener;
+
 import java.util.List;
 
 import static java.lang.Thread.sleep;
@@ -97,7 +97,7 @@ public class commande {
             this.update.setOnAction(event -> {
 
 
-                statu.setOnAction(_->{s=statu.getSelectionModel().getSelectedItem();
+                statu.setOnAction(Event_->{s=statu.getSelectionModel().getSelectedItem();
                     System.out.println(s);
                 });
 
@@ -107,7 +107,7 @@ public class commande {
                                 clientname = cl.getSelectionModel().getSelectedItem();
                             }
                         }
-                    );
+                );
 
 
 
@@ -153,42 +153,42 @@ public class commande {
 
 
                     if(!clientname.isEmpty()){
-                    System.out.println("item:"+ clientname);
-                    try {
-                        Client clien=clientService.getClient(clientname);
-                        System.out.println(clien.getId());
+                        System.out.println("item:"+ clientname);
+                        try {
+                            Client clien=clientService.getClient(clientname);
+                            System.out.println(clien.getId());
 
 
-                    update.setText("Update");
-                    Commande commande= new Commande();
-                    commande.setId(Integer.parseInt(id));
-                    commande.setCommandeDate(Date.valueOf(((DatePicker)commandeda).getValue()));
-                    commande.setTotalAmount(Float.parseFloat(((TextField)total).getText()));
-                    commande.setClient(clien.getId());
-                        System.out.println(s);
-                    commande.setStatus(s);
-                        commandeDao.updateCommande(commande);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                            update.setText("Update");
+                            Commande commande= new Commande();
+                            commande.setId(Integer.parseInt(id));
+                            commande.setCommandeDate(Date.valueOf(((DatePicker)commandeda).getValue()));
+                            commande.setTotalAmount(Float.parseFloat(((TextField)total).getText()));
+                            commande.setClient(clien.getId());
+                            System.out.println(s);
+                            commande.setStatus(s);
+                            commandeDao.updateCommande(commande);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
 
-                    Update.etat = true;
-                    Update update1 = new Update();
-                    update1.start();
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
+                        Update.etat = true;
+                        Update update1 = new Update();
+                        update1.start();
+                        updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
 
-                    TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
+                        TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
 //                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    commandeTable.setRoot(root);
-                    try {
-                        update1.loadCommande();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    msg.setText("");
+                        commandeTable.setRoot(root);
+                        try {
+                            update1.loadCommande();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        msg.setText("");
 
 
-                }else {
+                    }else {
                         msg.setStyle("-fx-text-fill: red;");
                         msg.setText("please select client");
                     }
@@ -266,7 +266,7 @@ public class commande {
                 }
 
                 userBtn.setVisible(false);
-                        System.out.println("thread  done");
+                System.out.println("thread  done");
 
 
 
@@ -331,7 +331,7 @@ public class commande {
 
 
 
-                           CommandeModel commandeModel = new CommandeModel(
+                            CommandeModel commandeModel = new CommandeModel(
                                     String.valueOf(commande.getId()),
                                     commande.getCommandeDate(),
                                     commande.getTotalAmount(),
@@ -356,7 +356,7 @@ public class commande {
                         commandeTable.setShowRoot(false);
                         commandedate.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getCommandeda()));
 
-                       totalamount.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getTotal()));
+                        totalamount.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getTotal()));
                         status.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getStatu()));
 
                         user.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getUserName()));
@@ -456,7 +456,7 @@ public class commande {
         Update.etat=false;
         facture facture = new facture();
 
-        facture.initialize(vbox.getScene());
+        facture.initialize(new Stage());
 
         this.commandeTable.getScene().getWindow().hide();
 
@@ -500,6 +500,17 @@ public class commande {
         commandeTable.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         commandeTable.getStyleClass().addAll("table-view","table table-striped");
 
+
+    }
+    @FXML
+    private Button btnAjouter;
+    @FXML
+    public void ajouterCommande(ActionEvent actionEvent) throws Throwable {
+        Scene currentScene = btnAjouter.getScene();
+
+        AjouterCommande ajouterCommandeController = new AjouterCommande();
+        ajouterCommandeController.afficherAjout();
+        btnAjouter.getScene().getWindow().hide();
 
     }
 

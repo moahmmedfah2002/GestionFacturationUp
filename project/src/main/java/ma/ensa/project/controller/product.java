@@ -199,7 +199,7 @@ public class product {
         Update.etat=false;
         facture facture = new facture();
 
-        facture.initialize(vbox.getScene());
+        facture.initialize(new Stage());
 
         this.produitTable.getScene().getWindow().hide();
 
@@ -207,7 +207,10 @@ public class product {
 
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
         Update.etat=false;
+        commande.Update.etat=false;
+
         commande commande = new commande();
 
         commande.initialize(vbox.getScene());

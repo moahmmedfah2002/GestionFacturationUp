@@ -3,7 +3,6 @@ package ma.ensa.project.service;
 import ma.ensa.project.Connexion;
 import ma.ensa.project.entity.Commande;
 import ma.ensa.project.entity.DetaileCommande;
-import ma.ensa.project.entity.Produit;
 import ma.ensa.project.repo.CommandeRepo;
 
 import java.sql.Connection;
@@ -24,8 +23,10 @@ public class CommandeService implements CommandeRepo {
     }
     @Override
     public boolean addCommande(Commande commande,List<DetaileCommande> detaileCommandes) throws SQLException, ClassNotFoundException {
-
-        PreparedStatement ps=con.prepareCall("INSERT INTO commande('commandedate','totalamount','statuePaiement','idClient','idUser') VALUES (?,?,?,?,?)");
+        DetaileCommandeService detaileCommandeService2= new DetaileCommandeService();
+        float p=detaileCommandeService2.SommeAvecTva(detaileCommandes);
+        commande.setTotalAmount(p);
+        PreparedStatement ps=con.prepareCall("INSERT INTO commande(`commandedate`, `totalamount`, `statuePaiement`, `idClient`, `idUser`) VALUES (?,?,?,?,?)");
         ps.setDate(1,commande.getCommandeDate());
         ps.setFloat(2,commande.getTotalAmount());
         ps.setBoolean(3,commande.isStatus());
@@ -35,12 +36,16 @@ public class CommandeService implements CommandeRepo {
         int count = ps.executeUpdate();
         boolean created= count > 0;
         if(created){
-        for(DetaileCommande detaile:detaileCommandes){
-            int id=ps.getGeneratedKeys().getInt("id");
-            detaile.setIdcommande(id);
-            detaileCommandeService.addDetaileCommande(detaile);
-
-        }
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int commandeId = generatedKeys.getInt(1);
+                    DetaileCommandeService detaileCommandeService1 = new DetaileCommandeService();
+                    for (DetaileCommande detaile : detaileCommandes) {
+                        detaile.setIdcommande(commandeId);
+                        detaileCommandeService.addDetaileCommande(detaile);
+                    }
+                }
+            }
         }
 
 
@@ -68,6 +73,8 @@ public class CommandeService implements CommandeRepo {
         }
         return commandes;
     }
+
+
 
     @Override
     public Commande getCommande(int id) throws SQLException {

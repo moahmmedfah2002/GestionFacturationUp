@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CommandeRepo {
     boolean addCommande(Commande commande,List<DetaileCommande> detaileCommandes) throws SQLException, ClassNotFoundException;
+
     Commande getCommande(int id) throws SQLException;
     List<Commande> getCommandes() throws SQLException;
     boolean updateCommande(Commande commande) throws SQLException;

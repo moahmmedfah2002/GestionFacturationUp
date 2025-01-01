@@ -1,6 +1,7 @@
 
 package ma.ensa.project.controller;
 
+import com.jfoenix.controls.JFXTreeTableView;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -45,6 +47,11 @@ public class addproduct {
         Ps=new ProduitService();
 
     }
+    @FXML
+    public VBox vbox= new VBox();
+
+    @FXML
+    public JFXTreeTableView<product.ProduitModel> addproduitTable= new JFXTreeTableView<>();
 
     @FXML
     public void save() throws IOException, SQLException, ClassNotFoundException {
@@ -74,12 +81,32 @@ public class addproduct {
 
 
     }
+
     @FXML
-    public void cancel(){
+    public void cancel(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        // Réinitialisation des champs
         Nom.setText("");
         Prix.setText("");
         Qd.setText("");
         Tva.setText("");
+
+        // Charger la vue Produit
+        ma.ensa.project.controller.product produit = new ma.ensa.project.controller.product();
+        produit.initialize(vbox.getScene());
+
+        // Cacher la fenêtre actuelle
+        this.addproduitTable.getScene().getWindow().hide();
+    }
+
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        commande commande = new commande();
+
+        commande.initialize(vbox.getScene());
+
+        this.addproduitTable.getScene().getWindow().hide();
+
+
 
     }
 

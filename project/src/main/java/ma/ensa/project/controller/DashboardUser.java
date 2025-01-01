@@ -225,6 +225,17 @@ public class DashboardUser {
         }
 
     }
+    public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        facture.Update.etat=false;
+        product facture = new product();
+
+        facture.initialize(vbox.getScene());
+
+        this.userTable.getScene().getWindow().hide();
+
+
+
+    }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
         Client client = new Client();

@@ -225,13 +225,14 @@ public class Client{
         Update.etat=false;
         facture facture = new facture();
 
-        facture.initialize(vbox.getScene());
+        facture.initialize(new Stage());
 
         this.clientTable.getScene().getWindow().hide();
 
 
 
     }
+
 
     public Client() throws SQLException, ClassNotFoundException, IOException {
 
@@ -385,9 +386,9 @@ public class Client{
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
-        ma.ensa.project.controller.commande commande1= new ma.ensa.project.controller.commande();
+        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
 
-        commande1.initialize(vbox.getScene());
+        commande.initialize(vbox.getScene());
 
         this.clientTable.getScene().getWindow().hide();
 
