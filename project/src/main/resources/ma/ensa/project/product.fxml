@@ -48,7 +48,7 @@
                 <VBox styleClass="table-container">
                     <HBox styleClass="table-header">
                         <children>
-                            <Label styleClass="section-title" text="Liste Produit"/>
+                            <Label styleClass="section-title" text="Liste des Produit"/>
                             <Region HBox.hgrow="ALWAYS"/>
 
                             <Button  styleClass="add-button" onAction="#addproduct">
@@ -67,7 +67,7 @@
                     <JFXTreeTableView fx:id="produitTable" minWidth="-Infinity" VBox.vgrow="ALWAYS">
                         <columns>
 
-                            <JFXTreeTableColumn fx:id="nom" text="nom produit" />
+                            <JFXTreeTableColumn  fx:id="nom" text="nom produit" />
                             <JFXTreeTableColumn fx:id="prix" text="prix"/>
                             <JFXTreeTableColumn fx:id="quantitedispo" text="quantité disponible"/>
 

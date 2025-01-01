@@ -205,7 +205,7 @@ public class product {
 
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
+        commande.Update.etat=false;
         commande commande = new commande();
 
         commande.initialize(vbox.getScene());

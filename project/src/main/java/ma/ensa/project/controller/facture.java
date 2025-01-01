@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import io.github.palexdev.mfxcore.controls.Label;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,13 +15,18 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ma.ensa.project.ApplicationGestionFacturation;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class facture {
 
 
+    public static Client.Update Update;
+
     public static class FactureModel extends RecursiveTreeObject<FactureModel> {
+
 
 
 
@@ -28,6 +34,8 @@ public class facture {
 
 
 
+    @FXML
+    private VBox vbox;
 
 
     @FXML
@@ -57,6 +65,8 @@ public class facture {
         stage.close();
     }
 
+
+
     public void initialize(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("facture.fxml"));
         scene=new Scene(fxmlLoader.load());
@@ -74,22 +84,84 @@ public class facture {
 
     }
 
-    public void user(ActionEvent actionEvent) {
 
-    }
 
-    public void client(ActionEvent actionEvent) {
-    }
 
-    public void produit(ActionEvent actionEvent) {
-    }
+
+
 
     public void facture(ActionEvent actionEvent) {
+
     }
 
-    public void full(ActionEvent actionEvent) {
+    public void full(Event mouseEvent) {
+        Stage stage = (Stage) btnFull.getScene().getWindow();
+        if (stage.isFullScreen()) {
+            stage.setFullScreen(false);
+
+        }else {
+            if (!stage.isFullScreen() ) {
+                stage.setFullScreen(true);
+
+            }}
+    }
+    @FXML
+    public void close(ActionEvent mouseEvent) throws Throwable {
+
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        Client.Update.etat = false;
+        stage.hide();
+
+
+
+    }
+    public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        ma.ensa.project.controller.commande.Update.etat=false;
+        ma.ensa.project.controller.Client client1= new ma.ensa.project.controller.Client();
+
+        client1.initialize(vbox.getScene());
+
+        this.commandeTable.getScene().getWindow().hide();
+
+
+
     }
 
-    public void close(ActionEvent actionEvent) {
+    public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        DashboardUser user = new DashboardUser();
+
+        user.initialize(vbox.getScene());
+
+        this.commandeTable.getScene().getWindow().hide();
+
+
+
     }
+    public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        product.Update.etat=false;
+        product produit = new product();
+
+        produit.initialize(vbox.getScene());
+
+        this.commandeTable.getScene().getWindow().hide();
+
+
+
+    }
+
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        ma.ensa.project.controller.commande.Update.etat=false;
+        ma.ensa.project.controller.commande commande1= new ma.ensa.project.controller.commande();
+
+        commande1.initialize(vbox.getScene());
+
+        this.commandeTable.getScene().getWindow().hide();
+
+
+
+
+    }
+
+
 }

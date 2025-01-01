@@ -233,6 +233,7 @@ public class Client{
 
     }
 
+
     public Client() throws SQLException, ClassNotFoundException, IOException {
 
         clientDao = new ClientService();
@@ -490,9 +491,9 @@ public class Client{
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
-        ma.ensa.project.controller.commande commande1= new ma.ensa.project.controller.commande();
+        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
 
-        commande1.initialize(vbox.getScene());
+        commande.initialize(vbox.getScene());
 
         this.clientTable.getScene().getWindow().hide();
 

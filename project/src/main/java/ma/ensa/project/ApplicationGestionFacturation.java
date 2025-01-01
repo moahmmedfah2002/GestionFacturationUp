@@ -17,7 +17,7 @@ public class ApplicationGestionFacturation extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        facture login = new facture();
+        Login login = new Login();
         login.initialize(primaryStage);
     }
 
@@ -25,4 +25,5 @@ public class ApplicationGestionFacturation extends Application {
         launch();
     }
 }
+
 
