@@ -92,7 +92,7 @@ public class Client{
 
                 if(Update.etat) {
 
-                    Update.etat = false;
+                    Update.etat = true;
                     name = new TextField(String.valueOf(name));
 
                     Adress = new TextField(String.valueOf(Adress));
@@ -395,7 +395,7 @@ public class Client{
 
     public class Update extends Thread{
         public void loadUsers() throws SQLException {
-            clientList.clear();
+            //clientList.clear();
             try {
                 // Vider la liste existante
 
@@ -406,7 +406,7 @@ public class Client{
                 List<ma.ensa.project.entity.Client> clients = clientDao.getClients();
                 Platform.runLater(() -> {
                     try {
-                        clientList.clear();
+                        //clientList.clear();
 
 
                         for (ma.ensa.project.entity.Client client : clients) {

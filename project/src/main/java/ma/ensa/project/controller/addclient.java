@@ -1,5 +1,6 @@
 package ma.ensa.project.controller;
 
+import com.jfoenix.controls.JFXTreeTableView;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,6 +37,12 @@ public class addclient {
     TextField Telephone;
     UserService us;
     ClientService cs;
+    @FXML
+    public VBox vbox= new VBox();
+
+    @FXML
+    public JFXTreeTableView<product.ProduitModel> addclientTable= new JFXTreeTableView<>();
+
 
 
     public addclient() throws SQLException, ClassNotFoundException, IOException {
@@ -71,13 +79,21 @@ public class addclient {
 
 
     }
+
     @FXML
-    public void cancel(){
+    public void cancel(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        // Réinitialisation des champs
         Nom.setText("");
         Address.setText("");
         Email.setText("");
         Telephone.setText("");
 
+        // Charger la vue Produit
+        ma.ensa.project.controller.Client client = new ma.ensa.project.controller.Client();
+        client.initialize(vbox.getScene());
+
+        // Cacher la fenêtre actuelle
+        this.addclientTable.getScene().getWindow().hide();
     }
 
     public void full(Event mouseEvent) {

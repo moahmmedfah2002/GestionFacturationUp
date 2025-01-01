@@ -464,7 +464,7 @@ public class commande {
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+        ma.ensa.project.controller.commande.Update.etat=false;
         ma.ensa.project.controller.Client client1= new ma.ensa.project.controller.Client();
 
         client1.initialize(vbox.getScene());
