@@ -225,6 +225,52 @@ public class DashboardUser {
         }
 
     }
+    public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        facture.Update.etat=false;
+        product facture = new product();
+
+        facture.initialize(vbox.getScene());
+
+        this.userTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        Client client = new Client();
+
+        client.initialize(vbox.getScene());
+
+        this.userTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        product.Update.etat=false;
+        product produit = new product();
+
+        produit.initialize(vbox.getScene());
+
+        this.userTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        commande.Update.etat=false;
+        commande commande = new commande();
+
+        commande.initialize(vbox.getScene());
+
+        this.userTable.getScene().getWindow().hide();
+
+
+
+    }
+
+
     @FXML
     public void initialize(Scene scene) throws IOException, SQLException {
 

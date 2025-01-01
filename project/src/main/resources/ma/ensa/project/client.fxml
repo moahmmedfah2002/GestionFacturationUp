@@ -17,12 +17,16 @@
       <VBox prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
          <children>
             <Label styleClass="dashboard-title" text="Client" />
-            <Button styleClass="nav-button" text="Users"  onAction="#user" />
-            <Button styleClass="nav-button" text="Clients" />
-            <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
-            <Button styleClass="nav-button" text="Commandes" />
-            <Button styleClass="nav-button" text="Paiements" />
-            <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
+
+
+
+            <Button styleClass="nav-button" text="Users" fx:id="userbtn"  onAction="#user" />
+            <Button styleClass="nav-button" fx:id="clientbtn" text="Clients" />
+            <Button styleClass="nav-button" fx:id="produitbtn" text="Produits" onAction="#produit"/>
+            <Button styleClass="nav-button" fx:id="commandebtn" text="Commandes" onAction="#commande"/>
+            <Button styleClass="nav-button" fx:id="paiementbtn" text="Paiements" />
+            <Button styleClass="nav-button" fx:id="facturnbtn" text="Factures" onAction="#facture"/>
+
             <VBox prefHeight="50.0" prefWidth="100.0" />
          </children>
       </VBox>
@@ -47,8 +51,8 @@
                   <children>
                      <Label styleClass="section-title" text="Liste des Client"/>
                      <Region HBox.hgrow="ALWAYS"/>
-                     <TextField promptText="🔍 Rechercher un utilisateur..." styleClass="search-field"/>
-                     <Button  styleClass="add-button">
+
+                     <Button  styleClass="add-button" onAction="#addclient">
                         <graphic>
                            <HBox alignment="CENTER" spacing="5">
                               <children>

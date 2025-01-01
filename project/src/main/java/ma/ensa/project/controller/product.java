@@ -170,6 +170,17 @@ public class product {
     private static ProduitService produitDao;
 
 
+    public void addproduct(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
+        addproduct add= new addproduct();
+
+        add.initialize(vbox.getScene());
+
+        this.produitTable.getScene().getWindow().hide();
+
+
+
+    }
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Client.Update.etat=false;
         DashboardUser user = new DashboardUser();
@@ -186,7 +197,18 @@ public class product {
         Client.Update.etat=false;
         facture facture = new facture();
 
-        facture.initialize(vbox.getScene());
+        facture.initialize(new Stage());
+
+        this.produitTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        commande.Update.etat=false;
+        commande commande = new commande();
+
+        commande.initialize(vbox.getScene());
 
         this.produitTable.getScene().getWindow().hide();
 
@@ -195,9 +217,9 @@ public class product {
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Client.Update.etat=false;
-        facture facture = new facture();
+        Client client = new Client();
 
-        facture.initialize(vbox.getScene());
+        client.initialize(vbox.getScene());
 
         this.produitTable.getScene().getWindow().hide();
 

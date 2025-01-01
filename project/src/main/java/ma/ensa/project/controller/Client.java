@@ -35,6 +35,13 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Client{
 
+    @FXML
+    public Button userbtn;
+    public Button clientbtn;
+    public Button produitbtn;
+    public Button commandebtn;
+    public Button paiementbtn;
+    public Button facturnbtn;
 
 
     @Data
@@ -157,6 +164,7 @@ public class Client{
     public VBox vbox= new VBox();
 
     @FXML
+
     public JFXTreeTableView<ClientModel> clientTable= new JFXTreeTableView<>();
     @FXML
     public JFXTreeTableColumn<ClientModel, Object> nom= new JFXTreeTableColumn<>("nom");
@@ -180,7 +188,17 @@ public class Client{
 
     private static ClientService clientDao;
 
+    public void addclient(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
 
+        addclient addclient= new addclient();
+
+        addclient.initialize(vbox.getScene());
+
+        this.clientTable.getScene().getWindow().hide();
+
+
+
+    }
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
         DashboardUser user = new DashboardUser();
@@ -207,13 +225,14 @@ public class Client{
         Update.etat=false;
         facture facture = new facture();
 
-        facture.initialize(vbox.getScene());
+        facture.initialize(new Stage());
 
         this.clientTable.getScene().getWindow().hide();
 
 
 
     }
+
 
     public Client() throws SQLException, ClassNotFoundException, IOException {
 
@@ -468,6 +487,18 @@ public class Client{
 
             interrupted();
         }
+
+    }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
+
+        commande.initialize(vbox.getScene());
+
+        this.clientTable.getScene().getWindow().hide();
+
+
+
 
     }
     @FXML

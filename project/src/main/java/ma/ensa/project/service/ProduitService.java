@@ -25,13 +25,13 @@ public class ProduitService implements ProduitRepo {
     @Override
     public boolean addProduit(Produit p,int UserId) throws SQLException {
 
-        String sql="Insert into Produit(nom,prix,quantitedisponible,idUser,tva)values(?,?,?,?,?)";
+        String sql="Insert into Produit(nom,prix,quantitéDisponible,idUser,tva)values(?,?,?,?,?)";
         PreparedStatement pstmt=con.prepareStatement(sql);
         pstmt.setString(1,p.getNom());
         pstmt.setDouble(2,p.getPrix());
         pstmt.setInt(3,p.getQuantiteDisponible());
-        pstmt.setFloat(4,p.getTva());
-        pstmt.setInt(5,UserId);
+        pstmt.setFloat(5,p.getTva());
+        pstmt.setInt(4,UserId);
         return pstmt.executeUpdate()!=0;
 
     }
