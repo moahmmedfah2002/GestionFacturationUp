@@ -22,21 +22,31 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
     }
     @Override
     public boolean addDetaileCommande(DetaileCommande detailecommande) throws SQLException {
-        PreparedStatement ps=con.prepareCall( "INSERT INTO DetailCommande(quantite,idCommande)");
+        PreparedStatement ps=con.prepareCall( "INSERT INTO DetailCommande(quantite,idproduit,idCommande) values (?,?,?)");
         ps.setInt(1, detailecommande.getQuantite());
-        ps.setInt(2,detailecommande.getIdcommande());
+        ps.setInt(2, detailecommande.getIdProduit());
+        ps.setInt(3,detailecommande.getIdcommande());
         return ps.executeUpdate()!=0;
 
     }
 
+
     @Override
-    public float SommeAvecTva(DetaileCommande detaileCommande) throws SQLException, ClassNotFoundException {
-         ProduitService produitService=new ProduitService();
-         int quantite=detaileCommande.getQuantite();
-         float produit=produitService.CalculTTC(detaileCommande.getIdProduit());
-         float q=produit*quantite;
-         return q;
+    public float SommeAvecTva(List<DetaileCommande> detaileCommande) throws SQLException, ClassNotFoundException {
+        float pr = 0;
+        ProduitService produitService = new ProduitService();
+        for (DetaileCommande e : detaileCommande) {
+            Produit p = produitService.getProduit(e.getIdProduit());
+            if (p != null) {
+                float tva = p.getTva();
+                float prix = p.getPrix();
+                float somme = (prix * e.getQuantite()) * (1 + tva / 100);
+                pr += somme;
+            }
+        }
+        return pr;
     }
+
 
     @Override
     public boolean updateDetaileCommande(DetaileCommande detaileCommande) throws SQLException {

@@ -11,6 +11,9 @@ public interface ProduitRepo {
     void deleteProduit(int id) throws SQLException;
     Produit getProduit(int id) throws SQLException;
     public float CalculTTC(int id) throws SQLException;
+
+    Produit getProduitByName(String name) throws SQLException;
+
     List<Produit> getAllProduits() throws SQLException;
 
 }

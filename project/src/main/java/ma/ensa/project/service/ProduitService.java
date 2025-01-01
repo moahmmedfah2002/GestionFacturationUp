@@ -76,7 +76,7 @@ public class ProduitService implements ProduitRepo {
           p.setNom(name);
           float prix=     rs.getFloat("prix");
           p.setPrix(prix);
-          int quantity=    rs.getInt("quantitedisponible");
+          int quantity=    rs.getInt("quantitédisponible");
           p.setQuantiteDisponible(quantity);
           int idUser=rs.getInt("idUser");
           p.setUserId(idUser);
@@ -88,6 +88,26 @@ public class ProduitService implements ProduitRepo {
         }
         return  p;
 
+    }
+
+
+    @Override
+    public Produit getProduitByName(String name) throws SQLException {
+        String sql = "SELECT * FROM Produit WHERE nom = ?";
+        PreparedStatement str = con.prepareStatement(sql);
+        str.setString(1, name);
+        ResultSet rs = str.executeQuery();
+        Produit p = new Produit();
+        if (rs.next()) {
+            int idpro = rs.getInt("id");
+            p.setId(idpro);
+            p.setNom(rs.getString("nom"));
+            p.setPrix(rs.getFloat("prix"));
+            p.setQuantiteDisponible(rs.getInt("quantitéDisponible"));
+            p.setUserId(rs.getInt("idUser"));
+            p.setTva(rs.getFloat("tva"));
+        }
+        return p;
     }
 
     @Override

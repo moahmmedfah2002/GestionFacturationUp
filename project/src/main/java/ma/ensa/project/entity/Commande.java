@@ -22,6 +22,15 @@ public class Commande {
         this.detailCommande = detailCommande;
         this.status =status ;
     }
+    public Commande(Date commandeDate, float totalAmount, int client,int idUser,boolean status) {
+        this.id = id;
+        this.commandeDate = commandeDate;
+        this.totalAmount = totalAmount;
+        this.client = client;
+        this.idUser = idUser;
+        this.detailCommande = detailCommande;
+        this.status =status ;
+    }
 
     public boolean isStatus() {
         return status;
