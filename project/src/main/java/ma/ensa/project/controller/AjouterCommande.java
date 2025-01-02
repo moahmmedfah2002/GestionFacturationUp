@@ -64,7 +64,9 @@ public class AjouterCommande {
     private final ClientService clientService=new ClientService();
     private int productCount = 1;
 
-    public AjouterCommande() throws SQLException, ClassNotFoundException {}
+    public AjouterCommande() throws SQLException, ClassNotFoundException {
+
+    }
     @FXML
     public VBox vbox= new VBox();
     @FXML
