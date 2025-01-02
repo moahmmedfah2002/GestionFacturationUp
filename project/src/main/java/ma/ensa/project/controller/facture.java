@@ -161,6 +161,17 @@ public class facture {
 
 
     }
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        Paiement paiement = new Paiement();
+
+        paiement.initialize(vbox.getScene());
+
+        this.commandeTable.getScene().getWindow().hide();
+
+
+
+    }
 
 
 

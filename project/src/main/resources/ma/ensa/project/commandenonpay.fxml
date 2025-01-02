@@ -10,18 +10,18 @@
 <?import com.jfoenix.controls.*?>
 
 
-<BorderPane stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.facture">
+<BorderPane stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.Commandenonpay">
 
 
     <left>
-        <VBox fx:id="vbox" prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
+        <VBox prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
             <children>
                 <Label styleClass="dashboard-title" text="Commande" />
-                <Button styleClass="nav-button" text="Users" onAction="#user" />
+                <Button styleClass="nav-button" text="Users" fx:id="userBtn"  onAction="#user" />
                 <Button styleClass="nav-button" text="Clients"  onAction="#client"/>
                 <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
-                <Button styleClass="nav-button" text="Commandes" onAction="#commande"/>
-                <Button styleClass="nav-button" text="Paiements" onAction="#Paiement" />
+                <Button styleClass="nav-button" text="Commandes" />
+                <Button styleClass="nav-button" text="Paiements" />
                 <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
                 <VBox prefHeight="50.0" prefWidth="100.0" />
             </children>
@@ -45,7 +45,7 @@
                 <VBox styleClass="table-container">
                     <HBox styleClass="table-header">
                         <children>
-                            <Label styleClass="section-title" text="Liste des facture"/>
+                            <Label styleClass="section-title" text="Liste des Commande"/>
                             <Region HBox.hgrow="ALWAYS"/>
                             <TextField promptText="🔍 Rechercher un utilisateur..." styleClass="search-field"/>
                             <Button  styleClass="add-button">
@@ -60,28 +60,28 @@
                         </children>
                     </HBox>
 
-                    <Label fx:id="msg"/>
-                    <JFXTreeTableView fx:id="commandeTable" minWidth="300" style="-fx-background-color: #FFFFFF;">
+                    <Label fx:id="msg"></Label>
+                    <JFXTreeTableView fx:id="commandeTable" minWidth="200" style="-fx-background-color: #2c3e50;">
                         <columns >
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="300"  fx:id="client" text="client"/>
+    -fx-background-color: transparent; /* Optional: Removes background */
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100"  fx:id="client" text="client"/>
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="300" fx:id="commande" text="commande date"/>
-
-
+    -fx-background-color: transparent; /* Optional: Removes background */
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100" fx:id="commandedate" text="commande date"/>
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="200" fx:id="user" text="Username"/>
+    -fx-background-color: transparent; /* Optional: Removes background */
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100"  fx:id="totalamount" text="total prix"/>
 
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="200" fx:id="DeleteColumn" text="delete"/>
+    -fx-background-color: transparent; /* Optional: Removes background */
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100" fx:id="user" text="Username"/>
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50
-    ; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="220" fx:id="pdfColumn" text="pdf"/>
+    -fx-background-color: transparent; /* Optional: Removes background */
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100" fx:id="datepaiement" text="date de paiement"/>
+                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
+    -fx-background-color: transparent; /* Optional: Removes background */
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="payColumn" text="valider paiement"/>
 
 
                         </columns>

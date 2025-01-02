@@ -44,6 +44,7 @@ public class Client{
     public Button facturnbtn;
 
 
+
     @Data
     public class ClientModel extends RecursiveTreeObject<ClientModel> {
         private Object id;
@@ -82,7 +83,7 @@ public class Client{
                     System.out.println(Integer.parseInt(delete.getId()));
                     clientDao.deleteClient(Integer.parseInt(delete.getId()));
                     Update update=new Update();
-                    update.loadUsers();
+                    update.loadClient();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -143,7 +144,7 @@ public class Client{
                     clientTable.setRoot(root);
                     Update update1 = new Update();
                     try {
-                        update1.loadUsers();
+                        update1.loadClient();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -221,6 +222,29 @@ public class Client{
 
 
     }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
+
+        commande.initialize(vbox.getScene());
+
+        this.clientTable.getScene().getWindow().hide();
+
+
+
+
+    }
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        Paiement paiement = new Paiement();
+
+        paiement.initialize(vbox.getScene());
+
+        this.clientTable.getScene().getWindow().hide();
+
+
+
+    }
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
         facture facture = new facture();
@@ -254,122 +278,6 @@ public class Client{
 
 
 
-
-
-
-
-
-
-
-
-
-    private void handleDelete(ma.ensa.project.entity.Client client) {
-        // Utiliser Platform.runLater pour éviter les conflits d'animation
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setTitle("Confirmation de suppression");
-            alert.setHeaderText("Supprimer l'utilisateur ?");
-            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
-
-            // Styling de l'alerte de confirmation
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.setStyle(
-                    "-fx-background-color: white;" +
-                            "-fx-border-color: #FF4757;" +
-                            "-fx-border-width: 2px;" +
-                            "-fx-border-radius: 5px;"
-            );
-
-            // Styling des boutons
-            Button okButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
-            okButton.setStyle(
-                    "-fx-background-color: #FF4757;" +
-                            "-fx-text-fill: white;" +
-                            "-fx-font-weight: bold;" +
-                            "-fx-background-radius: 5px;"
-            );
-
-            Button cancelButton = (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL);
-            cancelButton.setStyle(
-                    "-fx-background-color: #E8ECEF;" +
-                            "-fx-text-fill: #2D3436;" +
-                            "-fx-font-weight: bold;" +
-                            "-fx-background-radius: 5px;"
-            );
-
-            alert.showAndWait().ifPresent(response -> {
-                if (response == ButtonType.OK) {
-                    try {
-                        clientDao.deleteClient(client.getId());
-                        new Client();
-
-
-                        showSuccessMessage("Utilisateur supprimé avec succès");
-                    } catch (Exception e) {
-                        showErrorMessage("Erreur lors de la suppression : " + e.getMessage());
-                    }
-                }
-            });
-        });
-    }
-    private void showSuccessMessage(String message) {
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setTitle("Succès");
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStyleClass().add("success-alert");
-            dialogPane.setStyle(
-                    "-fx-background-color: white;" +
-                            "-fx-border-color: #2ECC71;" +
-                            "-fx-border-width: 2px;" +
-                            "-fx-border-radius: 5px;"
-            );
-
-            Button okButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
-            okButton.setStyle(
-                    "-fx-background-color: #2ECC71;" +
-                            "-fx-text-fill: white;" +
-                            "-fx-font-weight: bold;" +
-                            "-fx-background-radius: 5px;"
-            );
-
-            alert.showAndWait();
-        });
-    }
-
-    private void showErrorMessage(String message) {
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStyleClass().add("error-alert");
-            dialogPane.setStyle(
-                    "-fx-background-color: white;" +
-                            "-fx-border-color: #E74C3C;" +
-                            "-fx-border-width: 2px;" +
-                            "-fx-border-radius: 5px;"
-            );
-
-            Button okButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
-            okButton.setStyle(
-                    "-fx-background-color: #E74C3C;" +
-                            "-fx-text-fill: white;" +
-                            "-fx-font-weight: bold;" +
-                            "-fx-background-radius: 5px;"
-            );
-
-            alert.showAndWait();
-        });
-    }
-
     public void full(Event mouseEvent) {
         Stage stage = (Stage) btnFull.getScene().getWindow();
         if (stage.isFullScreen()) {
@@ -394,8 +302,12 @@ public class Client{
 
 
     public class Update extends Thread{
-        public void loadUsers() throws SQLException {
+
+        public void loadClient() throws SQLException {
             //clientList.clear();
+            // public void loadClient() throws SQLException {
+            clientList.clear();
+
             try {
                 // Vider la liste existante
 
@@ -469,7 +381,7 @@ public class Client{
                 try {
 
 
-                    loadUsers();
+                    loadClient();
                     sleep(3000);
 
 
@@ -489,18 +401,7 @@ public class Client{
         }
 
     }
-    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
-        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
 
-        commande.initialize(vbox.getScene());
-
-        this.clientTable.getScene().getWindow().hide();
-
-
-
-
-    }
     @FXML
     public void initialize(Scene scene) throws IOException, SQLException {
 

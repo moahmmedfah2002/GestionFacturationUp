@@ -1,5 +1,7 @@
 package ma.ensa.project.controller;
 
+
+
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -22,91 +24,85 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.Data;
 import ma.ensa.project.ApplicationGestionFacturation;
+import ma.ensa.project.entity.Commande;
 import ma.ensa.project.entity.Produit;
 import ma.ensa.project.entity.User;
-import ma.ensa.project.service.ClientService;
-import ma.ensa.project.service.ProduitService;
-import ma.ensa.project.service.UserService;
+import ma.ensa.project.service.*;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-public class product {
+public class Paiement {
     @Data
-    public class ProduitModel extends RecursiveTreeObject<ProduitModel> {
+    public class PaiementModel extends RecursiveTreeObject<PaiementModel> {
         private Object id;
         private Object name;
         private Object p;
-        private Object quanti;
+        private Object da;
         private Object UserName;
-        private Object tv;
-        private Button delete;
+
+
         private Button update;
 
         // Constructeur
-        public ProduitModel(String id, Object NomProduit, Object pr, Object quan,Object t, Object Us) {
+        public PaiementModel(String id, Object Nompaye, Object pr, Object d, Object Us) {
 
             this.id=id;
 
-            this.name =  NomProduit;
+            this.name =  Nompaye;
 //            System.out.println(name.get());
             this.p = pr;
-            this.quanti=quan;
+            this.da=d;
 
             this.UserName=Us;
-            this.tv=t;
-            this.delete=new Button("Delete");
-            this.delete.setId(id);
+
+
             this.update=new Button("Update");
             this.update.setId(id);
-            System.out.println("id: "+delete.getId());
+
             this.update.setOnAction(event -> {
 
 
                 if(Update.etat) {
 
                     Update.etat = false;
-                    name = new TextField(String.valueOf(name));
 
-                    p = new TextField(String.valueOf(p));
 
-                    quanti = new TextField(String.valueOf(quanti));
-
-                    tv = new TextField(String.valueOf(tv));
+                    da = new TextField(String.valueOf(da));
 
 
 
 
-                    nom.setCellValueFactory(cellData -> new SimpleObjectProperty<>(name));
 
-                    prix.setCellValueFactory(cellData -> new SimpleObjectProperty<>(p));
-                    quantitedispo.setCellValueFactory(cellData -> new SimpleObjectProperty<>(quanti));
-                    tva.setCellValueFactory(cellData -> new SimpleObjectProperty<>(tv));
+
+
+
+
+                    date.setCellValueFactory(cellData -> new SimpleObjectProperty<>(da));
+
                     update.setText("ok");
                     updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
 
-
-                    TreeItem<ProduitModel> root = new RecursiveTreeItem<>(produitList, RecursiveTreeObject::getChildren);
+                    TreeItem<PaiementModel> root = new RecursiveTreeItem<>(paiementList, RecursiveTreeObject::getChildren);
 //                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-
-                    produitTable.setRoot(root);
+                    paiementTable.setRoot(root);
                     Update update1 = new Update();
 
 
                 }else {
 
                     update.setText("Update");
-                    Produit produit= new Produit();
-                    produit.setId(Integer.parseInt(id));
-                    produit.setNom(String.valueOf(((TextField)name).getText()));
-                    produit.setPrix(Float.parseFloat(((TextField)p).getText()));
-                    produit.setQuantiteDisponible(Integer.parseInt(((TextField)quanti).getText()));
-                    produit.setTva(Float.parseFloat((((TextField)tv).getText())));
+                    ma.ensa.project.entity.Paiement pay= new ma.ensa.project.entity.Paiement();
+                    pay.setId(Integer.parseInt(id));
+                    pay.setDate(Date.valueOf(((TextField)da).getText()));
+
+
 
                     try {
-                        produitDao.updateProduit(produit);
+                        paiementDao.updatePaiement(pay);
 
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -116,80 +112,76 @@ public class product {
                     update1.start();
                     updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
 
-                    TreeItem<ProduitModel> root = new RecursiveTreeItem<>(produitList, RecursiveTreeObject::getChildren);
+                    TreeItem<PaiementModel> root = new RecursiveTreeItem<>(paiementList, RecursiveTreeObject::getChildren);
 //                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    produitTable.setRoot(root);
+                    paiementTable.setRoot(root);
 
 
 
                 }
 
             });
-            this.delete.setOnAction(event -> {
 
-
-
-
-
-                try {
-                    produitDao.deleteProduit(Integer.parseInt(delete.getId()));
-                    System.out.println(Integer.parseInt(delete.getId()));
-                    Update update=new Update();
-                    update.loadProduit();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
         }
     }
     @FXML
     public VBox vbox= new VBox();
 
     @FXML
-    public JFXTreeTableView<ProduitModel> produitTable= new JFXTreeTableView<>();
+    public JFXTreeTableView<PaiementModel> paiementTable= new JFXTreeTableView<>();
     @FXML
-    public JFXTreeTableColumn<ProduitModel, Object> nom= new JFXTreeTableColumn<>("nom");
+    public JFXTreeTableColumn<PaiementModel, Object> nom= new JFXTreeTableColumn<>("nom");
     @FXML
-    public JFXTreeTableColumn<ProduitModel, Object> prix= new JFXTreeTableColumn<>("prix");
+    public JFXTreeTableColumn<PaiementModel, Object> prix= new JFXTreeTableColumn<>("prix");
     @FXML
-    public JFXTreeTableColumn<ProduitModel, Object>  quantitedispo=new JFXTreeTableColumn<>("quantitedispo");
+    public JFXTreeTableColumn<PaiementModel, Object>  date=new JFXTreeTableColumn<>("date");
 
     @FXML
-    public JFXTreeTableColumn<ProduitModel, Object> user=new JFXTreeTableColumn<>("username");
-    @FXML
-    public JFXTreeTableColumn<ProduitModel, Object> tva=new JFXTreeTableColumn<>("tva");
+    public JFXTreeTableColumn<PaiementModel, Object> user=new JFXTreeTableColumn<>("username");
+
 
     @FXML
     public Button btnClose;
     public Button btnFull;
     private UserService userService;
-    private static ObservableList<ProduitModel> produitList = FXCollections.observableArrayList();
+    private static ObservableList<PaiementModel> paiementList = FXCollections.observableArrayList();
     @FXML
-    private JFXTreeTableColumn<ProduitModel, Button> DeleteColumn=new JFXTreeTableColumn<>("delete");
+    private JFXTreeTableColumn<PaiementModel, Button> DeleteColumn=new JFXTreeTableColumn<>("delete");
     @FXML
-    private JFXTreeTableColumn<ProduitModel, Button> updateColumn=new JFXTreeTableColumn<>("update");
+    private JFXTreeTableColumn<PaiementModel, Button> updateColumn=new JFXTreeTableColumn<>("update");
 
-    private static ProduitService produitDao;
+    private static PaimentService paiementDao;
 
 
-    public void addproduct(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+    public void addpaiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
 
         addproduct add= new addproduct();
 
         add.initialize(vbox.getScene());
 
-        this.produitTable.getScene().getWindow().hide();
+        this.paiementTable.getScene().getWindow().hide();
 
 
 
     }
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+        Client.Update.etat=false;
         DashboardUser user = new DashboardUser();
 
         user.initialize(vbox.getScene());
 
-        this.produitTable.getScene().getWindow().hide();
+        this.paiementTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        commande.Update.etat=false;
+        product produit = new product();
+
+        produit.initialize(vbox.getScene());
+
+        this.paiementTable.getScene().getWindow().hide();
 
 
 
@@ -201,70 +193,62 @@ public class product {
 
         facture.initialize(new Stage());
 
-        this.produitTable.getScene().getWindow().hide();
+        this.paiementTable.getScene().getWindow().hide();
 
 
 
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-
-        Update.etat=false;
-
-
-        Update.etat=false;
-        commande.Update.etat=false;
-
+        Client.Update.etat=false;
         commande commande = new commande();
 
         commande.initialize(vbox.getScene());
 
-        this.produitTable.getScene().getWindow().hide();
+        this.paiementTable.getScene().getWindow().hide();
 
 
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
-
         Client client = new Client();
-
 
         client.initialize(vbox.getScene());
 
-        this.produitTable.getScene().getWindow().hide();
+        this.paiementTable.getScene().getWindow().hide();
 
 
 
     }
-
-    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+    public void addpaiements(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
-        Paiement paiement = new Paiement();
+        Commandenonpay c = new Commandenonpay();
 
-        paiement.initialize(vbox.getScene());
+        c.initialize(vbox.getScene());
 
-        this.produitTable.getScene().getWindow().hide();
+        this.paiementTable.getScene().getWindow().hide();
 
 
 
     }
 
-    public product() throws SQLException, ClassNotFoundException, IOException {
 
-        produitDao = new ProduitService();
-        produitList = FXCollections.observableArrayList();
-        ProduitService ProduitService=new ProduitService();
+    public Paiement() throws SQLException, ClassNotFoundException, IOException {
+
+        paiementDao = new PaimentService();
+       paiementList = FXCollections.observableArrayList();
+
         Update update = new Update();
-        update.loadProduit();
+        update.loadPaiement();
 
-        produitTable.getColumns().add(nom);
-        produitTable.getColumns().add(prix);
-        produitTable.getColumns().add(quantitedispo);
+        paiementTable.getColumns().add(nom);
+        paiementTable.getColumns().add(prix);
+        paiementTable.getColumns().add(date);
 
-        produitTable.getColumns().add(user);
-        produitTable.getColumns().add(tva);
-        produitTable.getColumns().add(DeleteColumn);
-        produitTable.getColumns().add(updateColumn);
+        paiementTable.getColumns().add(user);
+
+        paiementTable.getColumns().add(DeleteColumn);
+        paiementTable.getColumns().add(updateColumn);
         update.start();
 
     }
@@ -289,8 +273,8 @@ public class product {
 
     }
     public class Update extends Thread{
-        public void loadProduit() throws SQLException {
-            produitList.clear();
+        public void loadPaiement() throws SQLException {
+            paiementList.clear();
             try {
                 // Vider la liste existante
 
@@ -298,50 +282,55 @@ public class product {
 
 
                 // Convertir les Users en UserModels
-                List<Produit> produits = produitDao.getAllProduits();
+                List<ma.ensa.project.entity.Paiement> paiements =paiementDao.getAllPaiement();
                 Platform.runLater(() -> {
                     try {
-                        produitList.clear();
+                        paiementList.clear();
 
 
-                        for (Produit produit : produits) {
+                        for (ma.ensa.project.entity.Paiement paiement : paiements) {
 
-                            int id = produit.getUserId();
+                            int id = paiement.getIdUser();
+                            int idc=paiement.getCommandeId();
                             System.out.println(id);
+                            CommandeService commandeservice=new CommandeService();
+                            Commande commande1=commandeservice.getCommande(idc);
                             UserService userService=new UserService();
                             User user1=userService.getUser(id);
+                            ClientService clientService=new ClientService();
+                            ma.ensa.project.entity.Client client=clientService.getClient(commande1.getClient());
 
 
-                            ProduitModel produitModel = new ProduitModel(
-                                    String.valueOf(produit.getId()),
-                                    produit.getNom(),
-                                    produit.getPrix(),
-                                   produit.getQuantiteDisponible(),
+                            PaiementModel paiementModel = new PaiementModel(
+                                    String.valueOf(paiement.getId()),
+                                   client.getNom(),
+                                    commande1.getTotalAmount(),
+                                    paiement.getDate(),
 
-                                    produit.getTva(),
+
                                     user1.getNomUtilisateur()
 
 
-                                    );
+                            );
 
 
-                            produitList.add(produitModel);
+                            paiementList.add(paiementModel);
 
 
                         }
 
-                        TreeItem<ProduitModel> root = new RecursiveTreeItem<>(produitList, RecursiveTreeObject::getChildren);
+                        TreeItem<PaiementModel> root = new RecursiveTreeItem<>(paiementList, RecursiveTreeObject::getChildren);
 //                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                        produitTable.setRoot(root);
-                        produitTable.setShowRoot(false);
+                        paiementTable.setRoot(root);
+                        paiementTable.setShowRoot(false);
                         nom.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getName()));
 
                         prix.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getP()));
-                        quantitedispo.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getQuanti()));
+                        date.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getDa()));
 
                         user.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getUserName()));
-                        tva.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getTv()));
-                        DeleteColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getDelete()));
+
+
                         updateColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getUpdate()));
 
 
@@ -368,7 +357,7 @@ public class product {
                 try {
 
 
-                    loadProduit();
+                    loadPaiement();
                     sleep(3000);
 
 
@@ -391,7 +380,7 @@ public class product {
     @FXML
     public void initialize(Scene scene) throws IOException, SQLException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("product.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("paiement.fxml"));
 
         scene=new Scene(fxmlLoader.load());
         Stage primaryStage =new Stage();
@@ -409,8 +398,8 @@ public class product {
         primaryStage.show();
 
 
-        produitTable.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-       produitTable.getStyleClass().addAll("table-view","table table-striped");
+        paiementTable.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        paiementTable.getStyleClass().addAll("table-view","table table-striped");
 
 
 

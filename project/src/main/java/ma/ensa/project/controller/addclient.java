@@ -96,6 +96,62 @@ public class addclient {
         this.addclientTable.getScene().getWindow().hide();
     }
 
+    public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        DashboardUser user = new DashboardUser();
+
+        user.initialize(vbox.getScene());
+
+        this.addclientTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        product produit = new product();
+
+        produit.initialize(vbox.getScene());
+
+        this.addclientTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        Paiement paiement = new Paiement();
+
+        paiement.initialize(vbox.getScene());
+
+        this.addclientTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        facture facture = new facture();
+
+        facture.initialize(new Stage());
+
+        this.addclientTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
+
+        commande.initialize(vbox.getScene());
+
+        this.addclientTable.getScene().getWindow().hide();
+
+
+
+
+    }
     public void full(Event mouseEvent) {
         Stage stage = (Stage) btnFull.getScene().getWindow();
         if (stage.isFullScreen()) {

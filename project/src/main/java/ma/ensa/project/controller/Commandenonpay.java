@@ -23,8 +23,10 @@ import lombok.Data;
 import ma.ensa.project.ApplicationGestionFacturation;
 import ma.ensa.project.entity.*;
 import ma.ensa.project.entity.Client;
+import ma.ensa.project.entity.Paiement;
 import ma.ensa.project.service.ClientService;
 import ma.ensa.project.service.CommandeService;
+import ma.ensa.project.service.PaimentService;
 import ma.ensa.project.service.UserService;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -32,14 +34,13 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
+import java.util.EventListener;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
 
-public class commande {
-    @FXML
-    public Button userBtn =new Button();
+public class Commandenonpay {
+
 
     @Data
     public class CommandeModel extends RecursiveTreeObject<CommandeModel> {
@@ -49,15 +50,14 @@ public class commande {
         private Object total;
         private Object cl;
         private Object UserName;
-        private Object statu;
-        private String clientname="";
-        private Button delete;
-        private Button update;
-        private Button detailscommande;
-        private Boolean s;
+        private Object datepay;
+
+
+        private Button validate;
+
 
         // Constructeur
-        public CommandeModel(String id, Object c, Object to, Object cli,Object us,Object st) throws SQLException {
+        public CommandeModel(String id, Object c, Object to, Object cli,Object us) throws SQLException {
 
             this.id=id;
 
@@ -66,155 +66,132 @@ public class commande {
             this.total = to;
             this.cl=cli;
 
+
             this.UserName=us;
-            this.statu=st;
-            List<Client> clients1=clientService.getClients();
-            ChoiceBox<String> cl = new ChoiceBox<>();
-            cl.setValue((String) cli);
-            for(Client c1: clients1) {
-                cl.getItems().add(c1.getNom());
-            }
-
-            this.delete=new Button("Delete");
-            this.delete.setId(id);
-            this.detailscommande=new Button("details commande");
-            this.detailscommande.setId(id);
-            this.delete.setStyle("-fx-background-color: #ae2727;\n" +
-                    "    -fx-text-fill: white;\n" +
-                    "    -fx-padding: 5px 10px;");
-            this.update=new Button("Update");
-
-            this.update.setId(id);
-            this.update.setStyle("-fx-background-color: #27ae60;\n" +
-                    "    -fx-text-fill: white;\n" +
-                    "    -fx-padding: 5px 10px;");
-            System.out.println("id: "+delete.getId());
-            ChoiceBox <Boolean> statu = new ChoiceBox<Boolean>();
-            statu.getItems().add(true);
-            statu.getItems().add(false);
-            statu.setValue((Boolean) st);
-
-            this.update.setOnAction(event -> {
 
 
-                statu.setOnAction(Event_->{s=statu.getSelectionModel().getSelectedItem();
-                    System.out.println(s);
-                });
 
 
-                cl.setOnAction(e-> {
-                            if (!cl.getSelectionModel().getSelectedItem().isEmpty()) {
-                                clientname = cl.getSelectionModel().getSelectedItem();
-                            }
+            this.validate=new Button("VALIDATE");
+            this.validate.setId(id);
+
+
+
+
+
+            this.validate.setOnAction(event -> {
+
+                        int idv= Integer.parseInt(validate.getId());
+                        if(Update.etat) {
+
+
+                            Update.etat = false;
+                            datepay = new DatePicker(LocalDate.parse(String.valueOf(commandeda)));
+                            validate.setText("ok");
+
+
+
+
+
+
+
+
+
+
+
+                            commandedate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(commandeda));
+
+                            totalamount.setCellValueFactory(cellData -> new SimpleObjectProperty<>(total));
+                            client.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cl));
+                            user.setCellValueFactory(cellData -> new SimpleObjectProperty<>(UserName));
+                            datepaiement.setCellValueFactory(cellData -> new SimpleObjectProperty<>(datepay));
+
+                            payColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(validate));
+
+
+
+
+                            TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
+//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
+                            commandeTable.setRoot(root);
+                            Update update1 = new Update();
+
+
+                        }else {
+
+
+
+
+
+
+
+                                try {
+                                    PaimentService p=new PaimentService();
+
+
+                                    User user=userService.getSession();
+                                    validate.setText("Validate");
+
+                                    Paiement pay=new Paiement();
+                                    pay.setDate(Date.valueOf(((DatePicker)datepay).getValue()));
+                                    pay.setCommandeId(idv);
+                                    System.out.println(user.getId());
+
+
+
+                                 Paiement k=   p.addPaiement(pay,user);
+
+
+
+
+
+                                System.out.println(k.getId());
+
+
+                                    commandeDao.updateCommandepaiement(idv ,k.getId());
+
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                } catch (ClassNotFoundException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+                            Update.etat = true;
+                                Update update1 = new Update();
+                                update1.start();
+                                payColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(validate));
+
+                                TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
+//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
+                                commandeTable.setRoot(root);
+                                try {
+                                    update1.loadCommande();
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+
+
+
                         }
+
+
+
+
+                    }
                 );
 
 
 
 
 
-                if(Update.etat) {
-
-                    Update.etat = false;
-                    commandeda = new DatePicker(LocalDate.parse(String.valueOf(commandeda)));
-
-                    total = new TextField(String.valueOf(total));
 
 
 
 
-
-
-
-
-
-
-                    commandedate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(commandeda));
-
-                    totalamount.setCellValueFactory(cellData -> new SimpleObjectProperty<>(total));
-                    client.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cl));
-                    user.setCellValueFactory(cellData -> new SimpleObjectProperty<>(UserName));
-                    status.setCellValueFactory(cellData -> new SimpleObjectProperty<>(statu));
-                    update.setText("ok");
-
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-
-                    TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    commandeTable.setRoot(root);
-                    Update update1 = new Update();
-
-
-                }else {
-
-
-
-
-
-
-                    if(!clientname.isEmpty()){
-                        System.out.println("item:"+ clientname);
-                        try {
-                            Client clien=clientService.getClient(clientname);
-                            System.out.println(clien.getId());
-
-
-                            update.setText("Update");
-                            Commande commande= new Commande();
-                            commande.setId(Integer.parseInt(id));
-                            commande.setCommandeDate(Date.valueOf(((DatePicker)commandeda).getValue()));
-                            commande.setTotalAmount(Float.parseFloat(((TextField)total).getText()));
-                            commande.setClient(clien.getId());
-                            System.out.println(s);
-                            commande.setStatus(s);
-                            commandeDao.updateCommande(commande);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                        Update.etat = true;
-                        Update update1 = new Update();
-                        update1.start();
-                        updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-
-                        TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                        commandeTable.setRoot(root);
-                        try {
-                            update1.loadCommande();
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                        msg.setText("");
-
-
-                    }else {
-                        msg.setStyle("-fx-text-fill: red;");
-                        msg.setText("please select client");
-                    }
-                }
-
-
-            });
-            this.delete.setOnAction(event -> {
-
-
-
-
-
-                try {
-                    commandeDao.deleteCommande(Integer.parseInt(delete.getId()));
-                    System.out.println(Integer.parseInt(delete.getId()));
-                    Update update=new Update();
-                    update.loadCommande();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-        }
+            }
     }
     @FXML
     public VBox vbox= new VBox();
@@ -228,28 +205,26 @@ public class commande {
     public JFXTreeTableColumn<CommandeModel, Object> totalamount= new JFXTreeTableColumn<>("prixtotal");
     @FXML
     public JFXTreeTableColumn<CommandeModel, Object>  client=new JFXTreeTableColumn<>("client");
-
+@FXML
+public   JFXTreeTableColumn<CommandeModel, Object>  datepaiement=new JFXTreeTableColumn<>("datepaiement");
     @FXML
     public JFXTreeTableColumn<CommandeModel, Object> user=new JFXTreeTableColumn<>("username");
-    @FXML
-    public JFXTreeTableColumn<CommandeModel, Object> status=new JFXTreeTableColumn<>("status");
+
 
     @FXML
     public Button btnClose;
     public Button btnFull;
     private UserService userService;
     private ClientService clientService;
+    private PaimentService paimentService;
     private static ObservableList<CommandeModel> commandeList = FXCollections.observableArrayList();
-    private static ObservableList<String> cList = FXCollections.observableArrayList();
+
     @FXML
-    private JFXTreeTableColumn<CommandeModel, Button> DeleteColumn=new JFXTreeTableColumn<>("delete");
-    @FXML
-    private JFXTreeTableColumn<CommandeModel, Button> updateColumn=new JFXTreeTableColumn<>("update");
-    @FXML
-    private JFXTreeTableColumn<CommandeModel, Button> detailsColumn=new JFXTreeTableColumn<>("details");
+    private JFXTreeTableColumn<CommandeModel, Button> payColumn=new JFXTreeTableColumn<>("pay");
+
 
     private static CommandeService commandeDao;
-    public commande() throws SQLException, ClassNotFoundException, IOException {
+    public Commandenonpay() throws SQLException, ClassNotFoundException, IOException {
         userService=new UserService();
         User user1=userService.getSession();
         List<Permission> permissions=userService.getUserPermissions(user1);
@@ -257,24 +232,6 @@ public class commande {
             System.out.println(permission.getNom());
         }
 
-        if (user1.getRole().equals(Role.UTILISATEUR.toString())){
-            Thread t1=new Thread(()->{
-                try {
-                    sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                userBtn.setVisible(false);
-                System.out.println("thread  done");
-
-
-
-
-            });
-            t1.start();
-
-        }
 
         clientService=new ClientService();
         userService=new UserService();
@@ -284,20 +241,17 @@ public class commande {
         Update update = new Update();
         update.loadCommande();
 
-        client.prefWidthProperty().bind(commandeTable.widthProperty().multiply(1));
-        commandedate.prefWidthProperty().bind(commandeTable.widthProperty().multiply(1));
-        totalamount.prefWidthProperty().bind(commandeTable.widthProperty().multiply(1));
-        user.prefWidthProperty().bind(commandeTable.widthProperty().multiply(0.6));
+
         commandeTable.getColumns().add(commandedate);
         commandeTable.getColumns().add(totalamount);
         commandeTable.getColumns().add(client);
 
         commandeTable.getColumns().add(user);
-        commandeTable.getColumns().add(status);
-        commandeTable.getColumns().add(DeleteColumn);
-        commandeTable.getColumns().add(updateColumn);
-        commandeTable.getColumns().add(detailsColumn);
-        commandeTable.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
+        commandeTable.getColumns().add(datepaiement);
+
+
+        commandeTable.getColumns().add(payColumn);
+
 
         update.start();
 
@@ -312,7 +266,7 @@ public class commande {
 
 
                 // Convertir les Users en UserModels
-                List<Commande> commandes = commandeDao.getCommandes();
+                List<Commande> commandes = commandeDao.getCommandebystatus(false);
                 Platform.runLater(() -> {
                     try {
                         commandeList.clear();
@@ -338,7 +292,7 @@ public class commande {
                                     client2.getNom(),
                                     user1.getNomUtilisateur()
 
-                                    ,commande.isStatus()
+
 
 
 
@@ -357,13 +311,13 @@ public class commande {
                         commandedate.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getCommandeda()));
 
                         totalamount.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getTotal()));
-                        status.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getStatu()));
+
 
                         user.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getUserName()));
                         client.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getCl()));
-                        DeleteColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getDelete()));
-                        updateColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getUpdate()));
-                        detailsColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getDetailscommande()));
+                        datepaiement.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(null));
+                        payColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getValidate()));
+
 
 
 
@@ -456,7 +410,7 @@ public class commande {
         Update.etat=false;
         facture facture = new facture();
 
-        facture.initialize(new Stage());
+        //facture.initialize(vbox.getScene());
 
         this.commandeTable.getScene().getWindow().hide();
 
@@ -464,21 +418,10 @@ public class commande {
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        ma.ensa.project.controller.commande.Update.etat=false;
+        Update.etat=false;
         ma.ensa.project.controller.Client client1= new ma.ensa.project.controller.Client();
 
         client1.initialize(vbox.getScene());
-
-        this.commandeTable.getScene().getWindow().hide();
-
-
-
-    }
-    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
-        Paiement paiement = new Paiement();
-
-        paiement.initialize(vbox.getScene());
 
         this.commandeTable.getScene().getWindow().hide();
 
@@ -489,7 +432,7 @@ public class commande {
     @FXML
     public void initialize(Scene scene) throws IOException, SQLException {
         client.prefWidthProperty().bind(commandeTable.widthProperty().multiply(0.5));
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("commande.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("commandenonpay.fxml"));
 
         scene=new Scene(fxmlLoader.load());
 
@@ -511,17 +454,6 @@ public class commande {
         commandeTable.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         commandeTable.getStyleClass().addAll("table-view","table table-striped");
 
-
-    }
-    @FXML
-    private Button btnAjouter;
-    @FXML
-    public void ajouterCommande(ActionEvent actionEvent) throws Throwable {
-        Scene currentScene = btnAjouter.getScene();
-
-        AjouterCommande ajouterCommandeController = new AjouterCommande();
-        ajouterCommandeController.afficherAjout();
-        btnAjouter.getScene().getWindow().hide();
 
     }
 

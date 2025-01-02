@@ -21,7 +21,7 @@
                 <Button styleClass="nav-button" text="Clients"  onAction="#client"/>
                 <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
                 <Button styleClass="nav-button" text="Commandes" />
-                <Button styleClass="nav-button" text="Paiements" />
+                <Button styleClass="nav-button" text="Paiements" onAction="#Paiement"/>
                 <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
                 <VBox prefHeight="50.0" prefWidth="100.0" />
             </children>
@@ -48,7 +48,7 @@
                             <Label styleClass="section-title" text="Liste des Commande"/>
                             <Region HBox.hgrow="ALWAYS"/>
                             <TextField promptText="🔍 Rechercher un utilisateur..." styleClass="search-field"/>
-                            <Button  styleClass="add-button">
+                            <Button  fx:id="btnAjouter" onAction="#ajouterCommande" styleClass="add-button">
                                 <graphic>
                                     <HBox alignment="CENTER" spacing="5">
                                         <children>
@@ -88,6 +88,7 @@
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
     -fx-background-color: transparent; /* Optional: Removes background */
     -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="detailsColumn" text="details"/>
+
 
                         </columns>
                         <placeholder>

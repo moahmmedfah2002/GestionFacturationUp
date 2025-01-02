@@ -10,19 +10,21 @@
 <?import com.jfoenix.controls.*?>
 
 
-<BorderPane stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.facture">
+<BorderPane stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.Paiement">
 
 
     <left>
-        <VBox fx:id="vbox" prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
+        <VBox prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
             <children>
-                <Label styleClass="dashboard-title" text="Commande" />
-                <Button styleClass="nav-button" text="Users" onAction="#user" />
-                <Button styleClass="nav-button" text="Clients"  onAction="#client"/>
+                <Label styleClass="dashboard-title" text="Paiement" />
+
+                <Button styleClass="nav-button" text="Users"  onAction="#user" />
+                <Button styleClass="nav-button" text="Clients" onAction="#client" />
                 <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
-                <Button styleClass="nav-button" text="Commandes" onAction="#commande"/>
-                <Button styleClass="nav-button" text="Paiements" onAction="#Paiement" />
+                <Button styleClass="nav-button" text="Commandes" onAction="#commande"  />
+                <Button styleClass="nav-button" text="Paiements" />
                 <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
+
                 <VBox prefHeight="50.0" prefWidth="100.0" />
             </children>
         </VBox>
@@ -45,10 +47,10 @@
                 <VBox styleClass="table-container">
                     <HBox styleClass="table-header">
                         <children>
-                            <Label styleClass="section-title" text="Liste des facture"/>
+                            <Label styleClass="section-title" text="Liste des Paiements"/>
                             <Region HBox.hgrow="ALWAYS"/>
-                            <TextField promptText="🔍 Rechercher un utilisateur..." styleClass="search-field"/>
-                            <Button  styleClass="add-button">
+
+                            <Button  styleClass="add-button" onAction="#addpaiements">
                                 <graphic>
                                     <HBox alignment="CENTER" spacing="5">
                                         <children>
@@ -60,33 +62,20 @@
                         </children>
                     </HBox>
 
-                    <Label fx:id="msg"/>
-                    <JFXTreeTableView fx:id="commandeTable" minWidth="300" style="-fx-background-color: #FFFFFF;">
-                        <columns >
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="300"  fx:id="client" text="client"/>
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="300" fx:id="commande" text="commande date"/>
 
+                    <JFXTreeTableView fx:id="paiementTable" minWidth="-Infinity" VBox.vgrow="ALWAYS">
+                        <columns>
 
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="200" fx:id="user" text="Username"/>
+                            <JFXTreeTableColumn fx:id="nom" text="Nom de CLient"/>
+                            <JFXTreeTableColumn fx:id="prix" text="montant paye"/>
+                            <JFXTreeTableColumn fx:id="date" text="date de paye"/>
+                            <JFXTreeTableColumn fx:id="user" text="user"/>
 
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="200" fx:id="DeleteColumn" text="delete"/>
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: #2c3e50
-    ; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="220" fx:id="pdfColumn" text="pdf"/>
-
+                            <JFXTreeTableColumn fx:id="updateColumn" text="update"/>
 
                         </columns>
                         <placeholder>
-                            <Label styleClass="empty-table-label" text="Aucun commande trouvé"/>
+                            <Label styleClass="empty-table-label" text="Aucun paye trouvé"/>
                         </placeholder>
                     </JFXTreeTableView>
                 </VBox>

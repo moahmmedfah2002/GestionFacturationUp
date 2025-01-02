@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<BorderPane stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.AjouterCommande">
+    <left>
+        <VBox prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
+            <children>
+                <Label styleClass="dashboard-title" text="Commande" />
+                <Button styleClass="nav-button" text="Users" fx:id="userBtn" />
+                <Button styleClass="nav-button" text="Clients" onAction="#client"/>
+                <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
+                <Button styleClass="nav-button" text="Commandes" onAction="#commande" />
+                <Button styleClass="nav-button" text="Paiements" onAction="#Paiement" />
+                <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
+                <VBox prefHeight="50.0" prefWidth="100.0" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox prefHeight="619.0" prefWidth="842.0" spacing="30" styleClass="content-area" alignment="CENTER">
+            <children>
+                <VBox styleClass="form-container" spacing="20" alignment="CENTER" prefWidth="600">
+                    <children>
+                        <Label styleClass="form-title" text="Ajouter une Commande" />
+
+                        <!-- GridPane pour aligner les champs -->
+                        <GridPane hgap="20" vgap="15" alignment="CENTER">
+                            <children>
+                                <!-- Ligne 1 : Champ Client -->
+                                <Label text="Client:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <ComboBox fx:id="comboBoxChoix" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="300" />
+                                <!-- Ligne 2 : Champ Date -->
+                                <Label text="Date commande:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                <!-- Ligne 3 : Champ Status Paiement -->
+                                <Label text="Status Paiement:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <ComboBox fx:id="statusField" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="300">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Payé" />
+                                            <String fx:value="Non Payé" />
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+                            </children>
+                        </GridPane>
+                        <!-- Ligne 4 : Produit et Quantité avec bouton "+" -->
+                        <Label text="Produit:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <VBox fx:id="productsContainer" spacing="10" alignment="CENTER" >
+                            <HBox spacing="15" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                <children>
+                                    <ComboBox fx:id="produitComboBox1" promptText="Sélectionnez un produit" prefWidth="200" />
+                                    <TextField fx:id="quantiteField1" promptText="Quantité" prefWidth="100" />
+                                    <Button text="+" fx:id="addProductBtn" styleClass="add-button" />
+                                </children>
+                            </HBox>
+                        </VBox>
+
+
+                        <!-- Bouton pour Ajouter -->
+                        <Button fx:id="addCommandeBtn" text="Ajouter" styleClass="add-button" maxWidth="200" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+
+    <top>
+        <Pane prefHeight="48.0" styleClass="sidebar">
+            <children>
+                <HBox prefHeight="50.0">
+                    <children>
+                        <VBox prefHeight="50.0" prefWidth="1111.0" />
+                        <VBox prefHeight="100.0" prefWidth="65.0">
+                            <children>
+                                <Button fx:id="btnClose" mnemonicParsing="false" prefHeight="49.0" prefWidth="48.0" style="-fx-background-color: none;" textAlignment="CENTER">
+                                    <graphic>
+                                        <ImageView fitHeight="28.0" fitWidth="32.0" opacity="0.63" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/close.png" />
+                                            </image>
+                                            <effect>
+                                                <Shadow color="#ff0000ac" height="1.0" radius="0.0" width="0.0" />
+                                            </effect>
+                                            <viewport>
+                                                <Rectangle2D />
+                                            </viewport>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="100.0" prefWidth="46.0">
+                            <children>
+                                <Button fx:id="btnFull" mnemonicParsing="false" prefHeight="52.0" prefWidth="51.0" style="-fx-background-color: none;">
+                                    <graphic>
+                                        <ImageView fitHeight="30.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/full.png" />
+                                            </image>
+                                            <effect>
+                                                <Shadow color="#0e80c280" height="0.0" radius="0.0" width="0.0" />
+                                            </effect>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </Pane>
+    </top>
+</BorderPane>
