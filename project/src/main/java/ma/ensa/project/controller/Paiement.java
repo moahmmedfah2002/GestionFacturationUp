@@ -192,7 +192,7 @@ public class Paiement {
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         facture facture = new facture();
 
-        facture.initialize(new Stage());
+        facture.initialize(new Stage().getScene());
 
         this.paiementTable.getScene().getWindow().hide();
 

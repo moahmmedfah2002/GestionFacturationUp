@@ -95,12 +95,13 @@ public class Client{
                     throw new RuntimeException(e);
                 }
             });
+            Update.etat = true;
             this.update.setOnAction(event -> {
 
 
                 if(Update.etat) {
 
-                    Update.etat = true;
+                    Update.etat = false;
                     name = new TextField(String.valueOf(name));
 
                     Adress = new TextField(String.valueOf(Adress));
@@ -127,18 +128,19 @@ public class Client{
 
 
                 }else {
+                    Update.etat = true;
 
                     update.setText("Update");
                     ma.ensa.project.entity.Client client= new ma.ensa.project.entity.Client();
                     client.setId(Integer.parseInt(id));
-                    client.setNom(String.valueOf(((TextField)name).getText()));
+                    client.setNom(((TextField)name).getText());
                     client.setAdresse(String.valueOf(String.valueOf(((TextField)Adress).getText())));
                     client.setEmail(String.valueOf(((TextField)Email).getText()));
                     client.setTelephone(String.valueOf(((TextField)Telephone).getText()));
 
                     try {
                         clientDao.updateClient(client);
-                        Update.etat = true;
+
                         Update update1 = new Update();
                         update1.start();
                     } catch (SQLException e) {
@@ -256,7 +258,7 @@ public class Client{
 
         facture facture = new facture();
 
-        facture.initialize(new Stage());
+        facture.initialize(new Stage().getScene());
 
         this.clientTable.getScene().getWindow().hide();
 
@@ -271,6 +273,7 @@ public class Client{
         clientList = FXCollections.observableArrayList();
         UserService userService=new UserService();
         Update update = new Update();
+        update.loadClient();
 
         clientTable.getColumns().add(nom);
         clientTable.getColumns().add(address);
@@ -309,9 +312,10 @@ public class Client{
 
 
     public class Update extends Thread{
+        public static Object mutex = new Object();
 
         public void loadClient() throws SQLException {
-            //clientList.clear();
+
             // public void loadClient() throws SQLException {
             clientList.clear();
 
@@ -391,7 +395,7 @@ public class Client{
 
 
                     loadClient();
-                    sleep(3000);
+                    sleep(30000);
 
 
 

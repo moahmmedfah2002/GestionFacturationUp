@@ -90,6 +90,7 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
             detailecommande.setQuantite(rs.getInt("quantite"));
             detailecommande.setIdProduit(rs.getInt("idProduit"));
             detailecommande.setId(rs.getInt("id"));
+            detailecommande.setIdProduit(rs.getInt("idProduit"));
             Detail.add(detailecommande);
 
         }

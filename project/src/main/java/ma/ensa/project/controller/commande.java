@@ -548,7 +548,7 @@ public class commande {
 
         facture facture = new facture();
 
-        facture.initialize(new Stage());
+        facture.initialize(new Stage().getScene());
 
         this.commandeTable.getScene().getWindow().hide();
 

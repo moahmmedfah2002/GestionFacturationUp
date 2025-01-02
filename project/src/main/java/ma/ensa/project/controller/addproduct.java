@@ -127,7 +127,7 @@ public class addproduct {
         facture facture = new facture();
 
 
-        facture.initialize(new Stage());
+        facture.initialize(new Stage().getScene());
 
         Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         currentStage.hide();
