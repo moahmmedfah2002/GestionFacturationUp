@@ -17,6 +17,8 @@ module ma.ensa.project {
     requires com.jfoenix;
     requires com.fasterxml.jackson.databind;
     requires org.json;
+    requires styled.xml.parser;
+    requires org.apache.pdfbox;
 
 
     opens ma.ensa.project to javafx.fxml;
