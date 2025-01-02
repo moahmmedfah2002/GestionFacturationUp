@@ -175,9 +175,20 @@ public class Paiement {
 
 
     }
+    public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        commande.Update.etat=false;
+        product produit = new product();
+
+        produit.initialize(vbox.getScene());
+
+        this.paiementTable.getScene().getWindow().hide();
+
+
+
+    }
 
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
+        Update.etat=false;
         facture facture = new facture();
 
         facture.initialize(new Stage());
@@ -199,7 +210,7 @@ public class Paiement {
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
+        Update.etat=false;
         Client client = new Client();
 
         client.initialize(vbox.getScene());

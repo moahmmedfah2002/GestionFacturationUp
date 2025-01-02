@@ -209,6 +209,9 @@ public class product {
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
 
         Update.etat=false;
+
+
+        Update.etat=false;
         commande.Update.etat=false;
 
         commande commande = new commande();
@@ -234,6 +237,17 @@ public class product {
 
     }
 
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        Paiement paiement = new Paiement();
+
+        paiement.initialize(vbox.getScene());
+
+        this.produitTable.getScene().getWindow().hide();
+
+
+
+    }
 
     public product() throws SQLException, ClassNotFoundException, IOException {
 

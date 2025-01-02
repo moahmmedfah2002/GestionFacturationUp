@@ -269,6 +269,17 @@ public class DashboardUser {
 
 
     }
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        Paiement paiement = new Paiement();
+
+        paiement.initialize(vbox.getScene());
+
+        this.userTable.getScene().getWindow().hide();
+
+
+
+    }
 
 
     @FXML

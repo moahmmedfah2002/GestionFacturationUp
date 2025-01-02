@@ -44,6 +44,7 @@ public class Client{
     public Button facturnbtn;
 
 
+
     @Data
     public class ClientModel extends RecursiveTreeObject<ClientModel> {
         private Object id;
@@ -92,7 +93,7 @@ public class Client{
 
                 if(Update.etat) {
 
-                    Update.etat = false;
+                    Update.etat = true;
                     name = new TextField(String.valueOf(name));
 
                     Adress = new TextField(String.valueOf(Adress));
@@ -221,6 +222,29 @@ public class Client{
 
 
     }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
+
+        commande.initialize(vbox.getScene());
+
+        this.clientTable.getScene().getWindow().hide();
+
+
+
+
+    }
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        Paiement paiement = new Paiement();
+
+        paiement.initialize(vbox.getScene());
+
+        this.clientTable.getScene().getWindow().hide();
+
+
+
+    }
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         Update.etat=false;
         facture facture = new facture();
@@ -254,17 +278,6 @@ public class Client{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     public void full(Event mouseEvent) {
         Stage stage = (Stage) btnFull.getScene().getWindow();
         if (stage.isFullScreen()) {
@@ -289,8 +302,12 @@ public class Client{
 
 
     public class Update extends Thread{
+
         public void loadClient() throws SQLException {
+            //clientList.clear();
+            // public void loadClient() throws SQLException {
             clientList.clear();
+
             try {
                 // Vider la liste existante
 
@@ -301,7 +318,7 @@ public class Client{
                 List<ma.ensa.project.entity.Client> clients = clientDao.getClients();
                 Platform.runLater(() -> {
                     try {
-                        clientList.clear();
+                        //clientList.clear();
 
 
                         for (ma.ensa.project.entity.Client client : clients) {
@@ -384,18 +401,7 @@ public class Client{
         }
 
     }
-    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
-        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
 
-        commande.initialize(vbox.getScene());
-
-        this.clientTable.getScene().getWindow().hide();
-
-
-
-
-    }
     @FXML
     public void initialize(Scene scene) throws IOException, SQLException {
 

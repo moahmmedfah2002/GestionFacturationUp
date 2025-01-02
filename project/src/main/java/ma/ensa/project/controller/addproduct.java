@@ -99,10 +99,55 @@ public class addproduct {
     }
 
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
+        commande.Update.etat=false;
         commande commande = new commande();
 
         commande.initialize(vbox.getScene());
+
+        this.addproduitTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        product.Update.etat=false;
+        product produit = new product();
+
+        produit.initialize(vbox.getScene());
+
+        this.addproduitTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        facture.Update.etat=false;
+        facture facture = new facture();
+
+
+        facture.initialize(new Stage());
+
+        this.addproduitTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        product.Update.etat=false;
+        DashboardUser user = new DashboardUser();
+
+        user.initialize(vbox.getScene());
+
+        this.addproduitTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Client.Update.etat=false;
+        Client client = new Client();
+
+        client.initialize(vbox.getScene());
 
         this.addproduitTable.getScene().getWindow().hide();
 

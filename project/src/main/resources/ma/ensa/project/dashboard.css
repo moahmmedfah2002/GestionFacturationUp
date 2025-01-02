@@ -112,7 +112,7 @@
     -fx-padding: 8 16;
     -fx-background-radius: 6;
     -fx-cursor: hand;
-    -fx-graphic: url('trash-icon.png'); /* Ajoutez votre icône */
+
     -fx-content-display: LEFT;
     -fx-graphic-text-gap: 8;
 }
@@ -266,7 +266,8 @@
 }
 
 /* Center align the actions column */
-.table-view .table-column:last-visible {
+.table-view .table-column:left
+{
     -fx-alignment: CENTER;
 }
 
@@ -347,4 +348,19 @@
 .actions-container {
     -fx-spacing: 8;
     -fx-alignment: CENTER_LEFT;
+}
+/* dashboard.css */
+.delete-column {
+    -fx-background-color: #ff4d4d; /* Rouge pour le bouton delete */
+    -fx-text-fill: white;
+}
+
+.update-column {
+    -fx-background-color: #4caf50; /* Vert pour le bouton update */
+    -fx-text-fill: white;
+}
+
+.details-column {
+    -fx-background-color: #2196f3; /* Bleu pour le bouton details */
+    -fx-text-fill: white;
 }

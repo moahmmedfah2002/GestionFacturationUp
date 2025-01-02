@@ -21,7 +21,7 @@
                 <Button styleClass="nav-button" text="Clients"  onAction="#client"/>
                 <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
                 <Button styleClass="nav-button" text="Commandes" />
-                <Button styleClass="nav-button" text="Paiements" />
+                <Button styleClass="nav-button" text="Paiements" onAction="#Paiement"/>
                 <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
                 <VBox prefHeight="50.0" prefWidth="100.0" />
             </children>
@@ -88,6 +88,7 @@
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
     -fx-background-color: transparent; /* Optional: Removes background */
     -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="detailsColumn" text="details"/>
+
 
                         </columns>
                         <placeholder>

@@ -1,9 +1,11 @@
 package ma.ensa.project.controller;
 
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTreeTableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -36,7 +38,8 @@ import javafx.scene.control.DatePicker;
 import java.time.LocalDate;
 
 public class AjouterCommande {
-
+    public Button btnClose;
+    public Button btnFull;
     @FXML
     private ComboBox<String> comboBoxChoix;
     @FXML
@@ -62,8 +65,12 @@ public class AjouterCommande {
     private int productCount = 1;
 
     public AjouterCommande() throws SQLException, ClassNotFoundException {}
-
     @FXML
+    public VBox vbox= new VBox();
+    @FXML
+    public JFXTreeTableView<commande.CommandeModel> ajoutercommandeTable= new JFXTreeTableView<>();
+    @FXML
+
     public void initialize() {
         try {
             List<Produit> produits = produitService.getAllProduits();
@@ -197,6 +204,95 @@ public class AjouterCommande {
                 e.printStackTrace();
             }
     }
+    public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        commande.Update.etat=false;
+        DashboardUser user = new DashboardUser();
+
+        user.initialize(vbox.getScene());
+
+        this.ajoutercommandeTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        commande.Update.etat=false;
+        product produit = new product();
+
+        produit.initialize(vbox.getScene());
+
+        this.ajoutercommandeTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        commande.Update.etat=false;
+        facture facture = new facture();
+
+        facture.initialize(new Stage());
+
+        this.ajoutercommandeTable.getScene().getWindow().hide();
+
+
+
+
+    }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        ma.ensa.project.controller.Client.Update.etat=false;
+        ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
+
+        commande.initialize(vbox.getScene());
+
+        this.ajoutercommandeTable.getScene().getWindow().hide();
+
+
+
+
+    }
+    public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        ma.ensa.project.controller.commande.Update.etat=false;
+        ma.ensa.project.controller.Client client1= new ma.ensa.project.controller.Client();
+
+        client1.initialize(vbox.getScene());
+
+        this.ajoutercommandeTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        commande.Update.etat=false;
+        Paiement paiement = new Paiement();
+
+        paiement.initialize(vbox.getScene());
+
+        this.ajoutercommandeTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void full(Event mouseEvent) {
+        Stage stage = (Stage) btnFull.getScene().getWindow();
+        if (stage.isFullScreen()) {
+            stage.setFullScreen(false);
+        }else {
+            if (!stage.isFullScreen() ) {
+                stage.setFullScreen(true);
+
+            }}
+    }
+    @FXML
+    public void close(ActionEvent mouseEvent) throws Throwable {
+
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        ma.ensa.project.controller.Client.Update.etat=false;
+        stage.hide();
+
+
+
+    }
+
 
 
 }

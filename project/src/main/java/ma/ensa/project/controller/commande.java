@@ -467,10 +467,21 @@ public class commande {
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+        ma.ensa.project.controller.commande.Update.etat=false;
         ma.ensa.project.controller.Client client1= new ma.ensa.project.controller.Client();
 
         client1.initialize(vbox.getScene());
+
+        this.commandeTable.getScene().getWindow().hide();
+
+
+
+    }
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Update.etat=false;
+        Paiement paiement = new Paiement();
+
+        paiement.initialize(vbox.getScene());
 
         this.commandeTable.getScene().getWindow().hide();
 
