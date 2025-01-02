@@ -112,7 +112,7 @@ public class UserService implements UserRepo {
     }
 
     @Override
-    public boolean addUser(User user, List<Permission> permissions) throws SQLException {
+    public boolean addUser(User user, List<String> permissions) throws SQLException {
         String p1=user.getMotDePasse();
         BCrypt bCrypt=new BCrypt();
         p1=hashPassword(p1);
@@ -127,11 +127,11 @@ public class UserService implements UserRepo {
             int i = id.getInt(1);
 
         if(result){
-        for(Permission p:permissions){
+        for(String p:permissions){
 
             PreparedStatement ps1 =con.prepareCall("INSERT INTO permissions(permission,idUser) VALUES(?,?)") ;
 
-            ps1.setString(1,p.getNom());
+            ps1.setString(1,p);
             ps1.setInt(2,i);
             ps1.executeUpdate();
         }
