@@ -36,6 +36,9 @@ import javafx.scene.control.DatePicker;
 import java.time.LocalDate;
 
 public class AjouterCommande {
+
+    @FXML
+    private ComboBox<String> comboBoxChoix;
     @FXML
     private TextField clientField;  // Champ pour le client
 
@@ -55,6 +58,7 @@ public class AjouterCommande {
     private ComboBox<String> produitComboBox1;
 
     private final ProduitService produitService = new ProduitService();
+    private final ClientService clientService=new ClientService();
     private int productCount = 1;
 
     public AjouterCommande() throws SQLException, ClassNotFoundException {}
@@ -68,6 +72,14 @@ public class AjouterCommande {
                 produitsNames.add(produit.getNom());
             }
             produitComboBox1.setItems(produitsNames);
+
+            List<Client> clients=clientService.getClients();
+            ObservableList<String> clientsNames = FXCollections.observableArrayList();
+            for (Client p : clients) {
+                clientsNames.add(p.getNom());
+            }
+            comboBoxChoix.setItems(clientsNames);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -156,7 +168,7 @@ public class AjouterCommande {
 
 
     public Commande creerCommande() throws SQLException, ClassNotFoundException, IOException {
-        String client = clientField.getText();
+        String client = comboBoxChoix.getValue();
         LocalDate localDate = datePicker.getValue();
         Date dateCommande = Date.valueOf(localDate);
         boolean statusPaiement = "Payé".equals(statusField.getValue());

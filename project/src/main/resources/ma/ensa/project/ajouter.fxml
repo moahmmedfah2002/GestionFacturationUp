@@ -36,8 +36,7 @@
                             <children>
                                 <!-- Ligne 1 : Champ Client -->
                                 <Label text="Client:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="clientField" promptText="Nom du client" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="300" />
-
+                                <ComboBox fx:id="comboBoxChoix" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="300" />
                                 <!-- Ligne 2 : Champ Date -->
                                 <Label text="Date commande:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                                 <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
