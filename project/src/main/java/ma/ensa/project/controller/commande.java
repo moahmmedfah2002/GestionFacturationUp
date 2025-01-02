@@ -93,22 +93,25 @@ public class commande {
             statu.getItems().add(true);
             statu.getItems().add(false);
             statu.setValue((Boolean) st);
+            s=(Boolean) st;
+            statu.setValue((Boolean) st);
+            statu.setOnAction(Event_->{
+
+
+                s = statu.getSelectionModel().getSelectedItem();
+
+            });
+
+            clientname=(String) cli;
+            cl.setOnAction(e-> {
+
+                        clientname = cl.getSelectionModel().getSelectedItem();
+
+                    }
+            );
+
 
             this.update.setOnAction(event -> {
-
-
-                statu.setOnAction(Event_->{s=statu.getSelectionModel().getSelectedItem();
-                    System.out.println(s);
-                });
-
-
-                cl.setOnAction(e-> {
-                            if (!cl.getSelectionModel().getSelectedItem().isEmpty()) {
-                                clientname = cl.getSelectionModel().getSelectedItem();
-                            }
-                        }
-                );
-
 
 
 
@@ -304,7 +307,7 @@ public class commande {
     }
     public class Update extends Thread{
         public void loadCommande() throws SQLException {
-            commandeList.clear();
+//            commandeList.clear();
             try {
                 // Vider la liste existante
 
