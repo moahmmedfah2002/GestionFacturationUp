@@ -13,6 +13,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -157,14 +158,29 @@ public class commande {
                     }
             );
             this.detailscommande.setOnAction(event->{
-//                d.ajouteid(Integer.parseInt(detailsColumn.getId()));
-//
-//
-//                    detail detail = new detail();
-//
-//                    user.initialize(vbox.getScene());
-//
-//                    commandeTable.getScene().getWindow().hide();
+
+                try {
+                    int idfac= Integer.parseInt(detailscommande.getId());
+
+
+                    commandeTable.getScene().getWindow().hide();
+
+                    FXMLLoader loader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("detail.fxml"));
+                    Parent parent = loader.load(); // Load the FXML file
+                    detail detail1 = loader.getController(); // Retrieve the controller instance
+                    detail1.setIdcom(idfac); // Set the ID
+
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(parent));
+                    stage.initStyle(StageStyle.UTILITY);
+                    stage.show();
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+
 
 
 

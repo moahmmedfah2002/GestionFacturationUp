@@ -83,10 +83,12 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
         PreparedStatement ps=con.prepareCall("SELECT * FROM detailcommande where idCommande=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
-        DetaileCommande detailecommande=new DetaileCommande();
+
         while(rs.next()) {
-            detailecommande.setIdcommande(rs.getInt("idcommande"));
+            DetaileCommande detailecommande=new DetaileCommande();
+            detailecommande.setIdcommande(rs.getInt("idCommande"));
             detailecommande.setQuantite(rs.getInt("quantite"));
+            detailecommande.setIdProduit(rs.getInt("idProduit"));
             detailecommande.setId(rs.getInt("id"));
             detailecommande.setIdProduit(rs.getInt("idProduit"));
             Detail.add(detailecommande);
