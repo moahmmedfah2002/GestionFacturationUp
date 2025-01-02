@@ -417,7 +417,7 @@ public   JFXTreeTableColumn<CommandeModel, Object>  datepaiement=new JFXTreeTabl
 
         //facture.initialize(vbox.getScene());
 
-        facture.initialize(new Stage());
+        facture.initialize(new Stage().getScene());
 
 
         this.commandeTable.getScene().getWindow().hide();

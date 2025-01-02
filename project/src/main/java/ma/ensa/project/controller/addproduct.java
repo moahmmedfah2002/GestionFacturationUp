@@ -123,7 +123,7 @@ public class addproduct {
         facture facture = new facture();
 
 
-        facture.initialize(new Stage());
+        facture.initialize(new Stage().getScene());
 
         this.addproduitTable.getScene().getWindow().hide();
 

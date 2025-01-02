@@ -63,6 +63,10 @@
                     <Label fx:id="msg"/>
                     <JFXTreeTableView fx:id="commandeTable" minWidth="300" style="-fx-background-color: #FFFFFF;">
                         <columns >
+
+                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
+    -fx-background-color: #2c3e50; /* Optional: Removes background */
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="300"  fx:id="id" text="id"/>
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
     -fx-background-color: #2c3e50; /* Optional: Removes background */
     -fx-border-width: 0; /* Ensures no border width */"  minWidth="300"  fx:id="client" text="client"/>
