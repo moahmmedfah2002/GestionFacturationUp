@@ -22,7 +22,7 @@
                 <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
                 <Button styleClass="nav-button" text="Commandes" onAction="#commande"/>
                 <Button styleClass="nav-button" text="Paiements" onAction="#Paiement" />
-                <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
+                <Button styleClass="nav-button" text="Factures" />
                 <VBox prefHeight="50.0" prefWidth="100.0" />
             </children>
         </VBox>

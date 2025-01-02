@@ -90,9 +90,7 @@ public class facture {
 
 
 
-    public void facture(ActionEvent actionEvent) {
 
-    }
 
     public void full(Event mouseEvent) {
         Stage stage = (Stage) btnFull.getScene().getWindow();
@@ -116,7 +114,7 @@ public class facture {
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        ma.ensa.project.controller.facture.Update.etat = false;
+
         ma.ensa.project.controller.Client client1 = new ma.ensa.project.controller.Client();
 
         client1.initialize(vbox.getScene());
@@ -127,7 +125,6 @@ public class facture {
     }
 
         public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
         DashboardUser user = new DashboardUser();
 
         user.initialize(vbox.getScene());
@@ -138,7 +135,6 @@ public class facture {
 
     }
     public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
         product produit = new product();
 
         produit.initialize(vbox.getScene());
@@ -150,7 +146,7 @@ public class facture {
     }
 
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         ma.ensa.project.controller.commande commande1= new ma.ensa.project.controller.commande();
 
         commande1.initialize(vbox.getScene());
@@ -162,7 +158,7 @@ public class facture {
 
     }
     public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         Paiement paiement = new Paiement();
 
         paiement.initialize(vbox.getScene());

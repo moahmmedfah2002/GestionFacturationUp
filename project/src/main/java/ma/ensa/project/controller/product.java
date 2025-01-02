@@ -196,7 +196,6 @@ public class product {
     }
 
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
         facture facture = new facture();
 
         facture.initialize(new Stage());
@@ -208,11 +207,7 @@ public class product {
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
 
-        Update.etat=false;
 
-
-        Update.etat=false;
-        commande.Update.etat=false;
 
         commande commande = new commande();
 
@@ -224,7 +219,6 @@ public class product {
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
 
         Client client = new Client();
 
@@ -238,7 +232,6 @@ public class product {
     }
 
     public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
         Paiement paiement = new Paiement();
 
         paiement.initialize(vbox.getScene());
