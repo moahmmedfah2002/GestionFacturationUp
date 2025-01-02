@@ -40,6 +40,8 @@ public class addclient {
     @FXML
     public VBox vbox= new VBox();
 
+
+
     @FXML
     public JFXTreeTableView<product.ProduitModel> addclientTable= new JFXTreeTableView<>();
 

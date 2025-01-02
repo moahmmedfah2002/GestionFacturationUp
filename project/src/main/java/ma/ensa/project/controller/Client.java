@@ -73,6 +73,13 @@ public class Client{
 
             this.delete.setId(id);
             this.update.setId(id);
+            this.update.setStyle("-fx-background-color: #27ae60;\n" +
+                    "    -fx-text-fill: white;\n" +
+                    "    -fx-padding: 5px 10px;");
+            this.delete.setStyle("-fx-background-color: #ae2727;\n" +
+                    "    -fx-text-fill: white;\n" +
+                    "    -fx-padding: 5px 10px;");
+
             this.delete.setOnAction(event -> {
 
 
@@ -201,7 +208,7 @@ public class Client{
 
     }
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         DashboardUser user = new DashboardUser();
 
         user.initialize(vbox.getScene());
@@ -212,7 +219,7 @@ public class Client{
 
     }
     public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         product produit = new product();
 
         produit.initialize(vbox.getScene());
@@ -223,7 +230,7 @@ public class Client{
 
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
 
         commande.initialize(vbox.getScene());
@@ -235,7 +242,7 @@ public class Client{
 
     }
     public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         Paiement paiement = new Paiement();
 
         paiement.initialize(vbox.getScene());
@@ -246,7 +253,7 @@ public class Client{
 
     }
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         facture facture = new facture();
 
         facture.initialize(new Stage());
@@ -317,6 +324,8 @@ public class Client{
                 // Convertir les Users en UserModels
                 List<ma.ensa.project.entity.Client> clients = clientDao.getClients();
                 Platform.runLater(() -> {
+                    clientList.clear();
+
                     try {
                         //clientList.clear();
 

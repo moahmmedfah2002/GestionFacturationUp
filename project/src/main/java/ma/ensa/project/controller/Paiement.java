@@ -62,6 +62,9 @@ public class Paiement {
 
             this.update=new Button("Update");
             this.update.setId(id);
+            this.update.setStyle("-fx-background-color: #27ae60;\n" +
+                    "    -fx-text-fill: white;\n" +
+                    "    -fx-padding: 5px 10px;");
 
             this.update.setOnAction(event -> {
 

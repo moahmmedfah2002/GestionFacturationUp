@@ -41,6 +41,7 @@ public class commande {
     @FXML
     public Button userBtn =new Button();
 
+
     @Data
     public class CommandeModel extends RecursiveTreeObject<CommandeModel> {
         private Object id;
@@ -75,10 +76,15 @@ public class commande {
                 cl.getItems().add(c1.getNom());
             }
 
+
             this.delete=new Button("Delete");
             this.delete.setId(id);
-            this.detailscommande=new Button("details commande");
+            this.detailscommande=new Button("details ");
             this.detailscommande.setId(id);
+            this.detailscommande.setStyle("-fx-background-color: #808080;\n" +
+                    "    -fx-text-fill: white;\n" +
+                    "    -fx-padding: 5px 10px;");
+
             this.delete.setStyle("-fx-background-color: #ae2727;\n" +
                     "    -fx-text-fill: white;\n" +
                     "    -fx-padding: 5px 10px;");
@@ -109,7 +115,24 @@ public class commande {
 
                     }
             );
+            this.detailscommande.setOnAction(event->{
+//                d.ajouteid(Integer.parseInt(detailsColumn.getId()));
+//
+//
+//                    detail detail = new detail();
+//
+//                    user.initialize(vbox.getScene());
+//
+//                    commandeTable.getScene().getWindow().hide();
 
+
+
+
+
+
+
+
+            });
 
             this.update.setOnAction(event -> {
 
@@ -219,6 +242,7 @@ public class commande {
 
         }
     }
+
     @FXML
     public VBox vbox= new VBox();
     @FXML
@@ -239,6 +263,8 @@ public class commande {
 
     @FXML
     public Button btnClose;
+    public detail d;
+
     public Button btnFull;
     private UserService userService;
     private ClientService clientService;

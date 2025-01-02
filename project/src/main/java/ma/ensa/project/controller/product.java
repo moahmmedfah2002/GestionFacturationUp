@@ -61,6 +61,12 @@ public class product {
             this.delete.setId(id);
             this.update=new Button("Update");
             this.update.setId(id);
+            this.update.setStyle("-fx-background-color: #27ae60;\n" +
+                    "    -fx-text-fill: white;\n" +
+                    "    -fx-padding: 5px 10px;");
+            this.delete.setStyle("-fx-background-color: #ae2727;\n" +
+                    "    -fx-text-fill: white;\n" +
+                    "    -fx-padding: 5px 10px;");
             System.out.println("id: "+delete.getId());
             this.update.setOnAction(event -> {
 

@@ -75,6 +75,10 @@ public class Commandenonpay {
             this.validate=new Button("VALIDATE");
             this.validate.setId(id);
 
+            this.validate.setStyle("-fx-background-color: #27ae60;\n" +
+                    "    -fx-text-fill: white;\n" +
+                    "    -fx-padding: 5px 10px;");
+
 
 
 
