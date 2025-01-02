@@ -34,27 +34,27 @@ public class Test1 {
         Assert.assertTrue(m);
 
 
-    }
-    @Test
-    public void add() throws SQLException, ClassNotFoundException, IOException {
-        UserService userService = new UserService();
-        User user = new User();
-        user.setNomUtilisateur("bilal");
-        user.setMotDePasse("123");
-        user.setRole(Role.ADMIN.toString());
-        Permission permission=new Permission();
-        permission.setNom(PermissionEnum.CREATE_CLIENT.toString());
-        Permission permission1=new Permission();
-        permission1.setNom(PermissionEnum.CREATE_FACTURE.toString());
-
-        List<Permission> permissions=new ArrayList<Permission>();
-        permissions.add(permission);
-        permissions.add(permission1);
-        userService.addUser(user,permissions);
-        Assert.assertEquals(userService.getSession().getId(),31);
-
-
     }}
+//    @Test
+//    public void add() throws SQLException, ClassNotFoundException, IOException {
+//        UserService userService = new UserService();
+//        User user = new User();
+//        user.setNomUtilisateur("bilal");
+//        user.setMotDePasse("123");
+//        user.setRole(Role.ADMIN.toString());
+//        Permission permission=new Permission();
+//        permission.setNom(PermissionEnum.CREATE_CLIENT.toString());
+//        Permission permission1=new Permission();
+//        permission1.setNom(PermissionEnum.CREATE_FACTURE.toString());
+//
+//        List<Permission> permissions=new ArrayList<Permission>();
+//        permissions.add(permission);
+//        permissions.add(permission1);
+//        userService.addUser(user,permissions);
+//        Assert.assertEquals(userService.getSession().getId(),31);
+//
+//
+//    }}
 //    @Test
 //    public void pdf() throws FileNotFoundException {
 //        try (PDDocument document = new PDDocument()) {

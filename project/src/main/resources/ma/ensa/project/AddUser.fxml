@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+
+<BorderPane stylesheets="@dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.ensa.project.controller.AddUser">
+
+    <left>
+        <VBox prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
+            <children>
+                <Label styleClass="dashboard-title" text="Gestion des Utilisateurs" />
+                <Button styleClass="nav-button" text="Users"/>
+                <Button styleClass="nav-button" text="Clients" />
+                <Button styleClass="nav-button" text="Produits"  />
+                <Button styleClass="nav-button" text="Commandes" />
+                <Button styleClass="nav-button" text="Paiements" />
+                <Button styleClass="nav-button" text="Factures"  />
+                <Button styleClass="nav-button" text="Cancel"  />
+                <VBox prefHeight="50.0" prefWidth="100.0" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20.0" styleClass="form-container">
+            <children>
+                <Label text="Ajouter un Utilisateur" styleClass="form-title" />
+
+                <!-- Informations de base -->
+                <VBox alignment="CENTER" spacing="15">
+                    <!-- Username -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label text="Nom d'utilisateur:" prefWidth="100"/>
+                        <TextField fx:id="username" prefWidth="300" promptText="Entrer le nom d'utilisateur" />
+                    </HBox>
+
+                    <!-- Password -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label text="Mot de passe:" prefWidth="100"/>
+                        <PasswordField fx:id="password" prefWidth="300" promptText="Entrer le mot de passe" />
+                    </HBox>
+
+                    <!-- Role -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label text="Rôle:" prefWidth="100"/>
+                        <ComboBox fx:id="roleComboBox" prefWidth="300"/>
+                    </HBox>
+
+                    <!-- Permissions Section -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label text="Permissions:" prefWidth="100"/>
+                        <VBox prefWidth="300">
+                            <ScrollPane prefHeight="200" fitToWidth="true"
+                                        style="-fx-background-color: transparent;">
+                                <VBox spacing="10" style="-fx-padding: 5;">
+                                    <!-- Utilisateurs -->
+                                    <VBox spacing="5" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 5;">
+                                        <Label text="Utilisateurs" style="-fx-font-weight: bold"/>
+                                        <CheckBox fx:id="createUserCheck" text="Créer"/>
+                                        <CheckBox fx:id="readUserCheck" text="Consulter"/>
+                                        <CheckBox fx:id="updateUserCheck" text="Modifier"/>
+                                        <CheckBox fx:id="deleteUserCheck" text="Supprimer"/>
+                                    </VBox>
+
+                                    <!-- Clients -->
+                                    <VBox spacing="5" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 5;">
+                                        <Label text="Clients" style="-fx-font-weight: bold"/>
+                                        <CheckBox fx:id="createClientCheck" text="Créer"/>
+                                        <CheckBox fx:id="readClientCheck" text="Consulter"/>
+                                        <CheckBox fx:id="updateClientCheck" text="Modifier"/>
+                                        <CheckBox fx:id="deleteClientCheck" text="Supprimer"/>
+                                    </VBox>
+
+                                    <!-- Produits -->
+                                    <VBox spacing="5" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 5;">
+                                        <Label text="Produits" style="-fx-font-weight: bold"/>
+                                        <CheckBox fx:id="createProduitCheck" text="Créer"/>
+                                        <CheckBox fx:id="readProduitCheck" text="Consulter"/>
+                                        <CheckBox fx:id="updateProduitCheck" text="Modifier"/>
+                                        <CheckBox fx:id="deleteProduitCheck" text="Supprimer"/>
+                                    </VBox>
+
+                                    <!-- Commandes -->
+                                    <VBox spacing="5" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 5;">
+                                        <Label text="Commandes" style="-fx-font-weight: bold"/>
+                                        <CheckBox fx:id="createCommandeCheck" text="Créer"/>
+                                        <CheckBox fx:id="readCommandeCheck" text="Consulter"/>
+                                        <CheckBox fx:id="updateCommandeCheck" text="Modifier"/>
+                                        <CheckBox fx:id="deleteCommandeCheck" text="Supprimer"/>
+                                    </VBox>
+
+                                    <!-- Factures -->
+                                    <VBox spacing="5" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 5;">
+                                        <Label text="Factures" style="-fx-font-weight: bold"/>
+                                        <CheckBox fx:id="createFactureCheck" text="Créer"/>
+                                        <CheckBox fx:id="readFactureCheck" text="Consulter"/>
+                                        <CheckBox fx:id="updateFactureCheck" text="Modifier"/>
+                                        <CheckBox fx:id="deleteFactureCheck" text="Supprimer"/>
+                                    </VBox>
+
+                                    <!-- Paiements -->
+                                    <VBox spacing="5" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 5;">
+                                        <Label text="Paiements" style="-fx-font-weight: bold"/>
+                                        <CheckBox fx:id="createPaiementCheck" text="Créer"/>
+                                        <CheckBox fx:id="readPaiementCheck" text="Consulter"/>
+                                        <CheckBox fx:id="updatePaiementCheck" text="Modifier"/>
+                                        <CheckBox fx:id="deletePaiementCheck" text="Supprimer"/>
+                                    </VBox>
+
+                                    <!-- Email -->
+                                    <VBox spacing="5" style="-fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 5;">
+                                        <Label text="Autres" style="-fx-font-weight: bold"/>
+                                        <CheckBox fx:id="mailCheck" text="Email"/>
+                                    </VBox>
+                                </VBox>
+                            </ScrollPane>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Message de statut -->
+                <Label fx:id="label" />
+
+                <!-- Boutons -->
+                <HBox alignment="CENTER" spacing="15">
+                    <children>
+                        <Button text="Sauvegarder" onAction="#save" styleClass="form-button" />
+                        <Button text="Annuler" onAction="#close" styleClass="form-button" />
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </center>
+
+    <top>
+        <Pane prefHeight="48.0" styleClass="sidebar">
+            <children>
+                <HBox prefHeight="50.0">
+                    <children>
+                        <VBox prefHeight="50.0" prefWidth="1111.0" />
+                        <VBox prefHeight="100.0" prefWidth="65.0">
+                            <children>
+                                <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="49.0" prefWidth="48.0" style="-fx-background-color: none;" textAlignment="CENTER">
+                                    <graphic>
+                                        <ImageView fitHeight="28.0" fitWidth="32.0" opacity="0.63" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/close.png" />
+                                            </image>
+                                            <effect>
+                                                <Shadow color="#ff0000ac" height="1.0" radius="0.0" width="0.0" />
+                                            </effect>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="100.0" prefWidth="46.0">
+                            <children>
+                                <Button fx:id="btnFull" mnemonicParsing="false" onAction="#full" prefHeight="52.0" prefWidth="51.0" style="-fx-background-color: none;">
+                                    <graphic>
+                                        <ImageView fitHeight="30.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/full.png" />
+                                            </image>
+                                            <effect>
+                                                <Shadow color="#0e80c280" height="0.0" radius="0.0" width="0.0" />
+                                            </effect>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </Pane>
+    </top>
+
+</BorderPane>

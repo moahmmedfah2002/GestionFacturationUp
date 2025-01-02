@@ -10,10 +10,10 @@ public interface FactureRepo {
 
     void addFacture(Facture facture) throws SQLException;
     Facture getFacture(int id) throws SQLException;
-    Commande getCommandeForFacture(int idFacture) throws SQLException;
-    boolean deleteFacture(int id) throws SQLException;
-    boolean updateFacture(Facture facture) throws SQLException;
-    List<Facture> getFactures() throws SQLException, ClassNotFoundException;
+//    Commande getCommandeForFacture(int idFacture) throws SQLException;
+//    boolean deleteFacture(int id) throws SQLException;
+//    boolean updateFacture(Facture facture) throws SQLException;
+   List<Facture> getFactures() throws SQLException, ClassNotFoundException;
 
 
 }

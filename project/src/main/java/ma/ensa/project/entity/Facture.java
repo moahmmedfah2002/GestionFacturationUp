@@ -11,18 +11,11 @@ public class Facture {
 
     private int id;
 
-    private int clientId;  // Id du client
+    private int idCommande;  // Id du client
 
-    private double montant;
+    private int idUser;
 
-    private boolean statut;
 
-    private Date date;
-
-    private double tax;
-
-    private Paiement paiements;
-    private Commande commande;
 
 
 
@@ -30,19 +23,14 @@ public class Facture {
 
     }
 
-
+    public Facture(int idfac, int idCommand, int iduser) {
+        id=idfac;
+        idCommande=idCommand;
+        idUser=iduser;
+    }
 
 
     // Constructeur
-    public Facture(int id, int clientId, double montant, boolean statut, Date date, double tax, Paiement paiements) {
-        this.id = id;
-        this.clientId = clientId;
-        this.montant = montant;
-        this.statut = statut;
-        this.date = date;
-        this.tax = tax;
-        this.paiements = paiements;
-    }
 
 
 

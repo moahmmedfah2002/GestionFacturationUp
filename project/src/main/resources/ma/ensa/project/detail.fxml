@@ -61,36 +61,15 @@
                     </HBox>
 
                     <Label fx:id="msg"></Label>
-                    <JFXTreeTableView fx:id="commandeTable" minWidth="200" style="-fx-background-color: #2c3e50;">
+                    <JFXTreeTableView fx:id="detailTable" minWidth="200" style="-fx-background-color: #2c3e50;">
                         <columns >
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
     -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100"  fx:id="client" text="client"/>
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100"  fx:id="product" text="produit"/>
                             <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
     -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100" fx:id="commandedate" text="commande date"/>
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100"  fx:id="totalamount" text="total prix"/>
+    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100" fx:id="quan" text="quantite"/>
 
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100" fx:id="user" text="Username"/>
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="100" fx:id="status" text="status payment"/>
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="DeleteColumn" text="delete"/>
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="updateColumn" text="update"/>
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="detailsColumn" text="details"/>
-                            <JFXTreeTableColumn style="-fx-border-color: transparent; /* Removes the border */
-    -fx-background-color: transparent; /* Optional: Removes background */
-    -fx-border-width: 0; /* Ensures no border width */"  minWidth="20" fx:id="genrateColumn" text="generate facture"/>
 
 
                         </columns>

@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,8 +21,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.Data;
 import ma.ensa.project.ApplicationGestionFacturation;
+import ma.ensa.project.entity.DetaileCommande;
 import ma.ensa.project.entity.User;
-import ma.ensa.project.service.ClientService;
+import ma.ensa.project.service.CommandeService;
+import ma.ensa.project.service.DetaileCommandeService;
+import ma.ensa.project.service.ProduitService;
 import ma.ensa.project.service.UserService;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -32,7 +34,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class detail {
-
+//    int idcom;
+//
 //    @FXML
 //    public Button userbtn;
 //    public Button clientbtn;
@@ -56,105 +59,9 @@ public class detail {
 //
 //            this.id=id;
 //
-//            this.name =  NomClient;
+//            this.produit =  p;
 ////            System.out.println(name.get());
-//            this.Adress = Aress;
-//            System.out.println(Adress);
-//            this.Telephone = Te;
-//            this.Email = E;
-//            this.UserName=Us;
-//            this.delete=new Button("Delete");
-//            this.update=new Button("Update");
-//
-//            this.delete.setId(id);
-//            this.update.setId(id);
-//            this.update.setStyle("-fx-background-color: #27ae60;\n" +
-//                    "    -fx-text-fill: white;\n" +
-//                    "    -fx-padding: 5px 10px;");
-//            this.delete.setStyle("-fx-background-color: #ae2727;\n" +
-//                    "    -fx-text-fill: white;\n" +
-//                    "    -fx-padding: 5px 10px;");
-//
-//            this.delete.setOnAction(event -> {
-//
-//
-//
-//
-//
-//                try {
-//                    System.out.println(Integer.parseInt(delete.getId()));
-//                    clientDao.deleteClient(Integer.parseInt(delete.getId()));
-//                    Client.Update update=new Client.Update();
-//                    update.loadClient();
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            });
-//            this.update.setOnAction(event -> {
-//
-//
-//                if(Client.Update.etat) {
-//
-//                    Client.Update.etat = true;
-//                    name = new TextField(String.valueOf(name));
-//
-//                    Adress = new TextField(String.valueOf(Adress));
-//
-//                    Email = new TextField(String.valueOf(Email));
-//
-//                    Telephone = new TextField(String.valueOf(Telephone));
-//
-//
-//
-//
-//                    nom.setCellValueFactory(cellData -> new SimpleObjectProperty<>(name));
-//
-//                    address.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Adress));
-//                    email.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Email));
-//                    telephone.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Telephone));
-//                    update.setText("ok");
-//                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-//
-//                    TreeItem<Client.ClientModel> root = new RecursiveTreeItem<>(clientList, RecursiveTreeObject::getChildren);
-////                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-//                    clientTable.setRoot(root);
-//                    Client.Update update1 = new Client.Update();
-//
-//
-//                }else {
-//
-//                    update.setText("Update");
-//                    ma.ensa.project.entity.Client client= new ma.ensa.project.entity.Client();
-//                    client.setId(Integer.parseInt(id));
-//                    client.setNom(String.valueOf(((TextField)name).getText()));
-//                    client.setAdresse(String.valueOf(String.valueOf(((TextField)Adress).getText())));
-//                    client.setEmail(String.valueOf(((TextField)Email).getText()));
-//                    client.setTelephone(String.valueOf(((TextField)Telephone).getText()));
-//
-//                    try {
-//                        clientDao.updateClient(client);
-//                        Client.Update.etat = true;
-//                        Client.Update update1 = new Client.Update();
-//                        update1.start();
-//                    } catch (SQLException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-//
-//                    TreeItem<Client.ClientModel> root = new RecursiveTreeItem<>(clientList, RecursiveTreeObject::getChildren);
-////                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-//                    clientTable.setRoot(root);
-//                    Client.Update update1 = new Client.Update();
-//                    try {
-//                        update1.loadClient();
-//                    } catch (SQLException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//
-//                }
-//
-//            });
-//        }
+//            this.quantite = q;
 //
 //
 //
@@ -162,53 +69,37 @@ public class detail {
 //
 //
 //
-//    }
+//
+//    }}
 //    @FXML
 //    public VBox vbox= new VBox();
 //
 //    @FXML
 //
-//    public JFXTreeTableView<Client.ClientModel> clientTable= new JFXTreeTableView<>();
+//    public JFXTreeTableView<DetailModel> detailTable= new JFXTreeTableView<>();
 //    @FXML
-//    public JFXTreeTableColumn<Client.ClientModel, Object> nom= new JFXTreeTableColumn<>("nom");
+//    public JFXTreeTableColumn<DetailModel, Object> product= new JFXTreeTableColumn<>("produit");
 //    @FXML
-//    public JFXTreeTableColumn<Client.ClientModel, Object> address= new JFXTreeTableColumn<>("Address");
-//    @FXML
-//    public JFXTreeTableColumn<Client.ClientModel, Object> email=new JFXTreeTableColumn<>("Email");
-//    @FXML
-//    public JFXTreeTableColumn<Client.ClientModel, Object> telephone=new JFXTreeTableColumn<>("Telephone");
-//    @FXML
-//    public JFXTreeTableColumn<Client.ClientModel, Object> user=new JFXTreeTableColumn<>("username");
+//    public JFXTreeTableColumn<DetailModel, Object> quan= new JFXTreeTableColumn<>("quantity");
+//
 //    @FXML
 //    public Button btnClose;
 //    public Button btnFull;
 //    private UserService userService;
-//    private static ObservableList<Client.ClientModel> clientList = FXCollections.observableArrayList();
-//    @FXML
-//    private JFXTreeTableColumn<Client.ClientModel, Button> DeleteColumn=new JFXTreeTableColumn<>("delete");
-//    @FXML
-//    private JFXTreeTableColumn<Client.ClientModel, Button> updateColumn=new JFXTreeTableColumn<>("update");
-//
-//    private static ClientService clientDao;
-//
-//    public void addclient(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-//
-//        addclient addclient= new addclient();
-//
-//        addclient.initialize(vbox.getScene());
-//
-//        this.clientTable.getScene().getWindow().hide();
+//    private static ObservableList<DetailModel> detailList = FXCollections.observableArrayList();
 //
 //
+//    private static ProduitService Dao;
+//    private static DetaileCommandeService service;
 //
-//    }
+//
 //    public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
 //
 //        DashboardUser user = new DashboardUser();
 //
 //        user.initialize(vbox.getScene());
 //
-//        this.clientTable.getScene().getWindow().hide();
+//        this.detailTable.getScene().getWindow().hide();
 //
 //
 //
@@ -219,7 +110,7 @@ public class detail {
 //
 //        produit.initialize(vbox.getScene());
 //
-//        this.clientTable.getScene().getWindow().hide();
+//        this.detailTable.getScene().getWindow().hide();
 //
 //
 //
@@ -230,7 +121,7 @@ public class detail {
 //
 //        commande.initialize(vbox.getScene());
 //
-//        this.clientTable.getScene().getWindow().hide();
+//        this.detailTable.getScene().getWindow().hide();
 //
 //
 //
@@ -242,7 +133,7 @@ public class detail {
 //
 //        paiement.initialize(vbox.getScene());
 //
-//        this.clientTable.getScene().getWindow().hide();
+//        this.detailTable.getScene().getWindow().hide();
 //
 //
 //
@@ -253,27 +144,26 @@ public class detail {
 //
 //        facture.initialize(new Stage());
 //
-//        this.clientTable.getScene().getWindow().hide();
+//        this.detailTable.getScene().getWindow().hide();
 //
 //
 //
 //    }
 //
 //
-//    public Client() throws SQLException, ClassNotFoundException, IOException {
+//    public  detail(int id) throws SQLException, ClassNotFoundException, IOException {
 //
-//        clientDao = new ClientService();
-//        clientList = FXCollections.observableArrayList();
-//        UserService userService=new UserService();
-//        Client.Update update = new Client.Update();
+//            idcom=id;
 //
-//        clientTable.getColumns().add(nom);
-//        clientTable.getColumns().add(address);
-//        clientTable.getColumns().add(email);
-//        clientTable.getColumns().add(telephone);
-//        clientTable.getColumns().add(user);
-//        clientTable.getColumns().add(DeleteColumn);
-//        clientTable.getColumns().add(updateColumn);
+//
+//
+//       service= new DetaileCommandeService();
+//        detailList = FXCollections.observableArrayList();
+//
+//        Update update = new Update();
+//
+//        detailTable.getColumns().add(product);
+//        detailTable.getColumns().add(quan);
 //        update.start();
 //
 //    }
@@ -305,10 +195,10 @@ public class detail {
 //
 //    public class Update extends Thread{
 //
-//        public void loadClient() throws SQLException {
+//        public void loadDetail() throws SQLException {
 //            //clientList.clear();
 //            // public void loadClient() throws SQLException {
-//            clientList.clear();
+//            detailList.clear();
 //
 //            try {
 //                // Vider la liste existante
@@ -317,19 +207,19 @@ public class detail {
 //
 //
 //                // Convertir les Users en UserModels
-//                List<ma.ensa.project.entity.Client> clients = clientDao.getClients();
+//                List<DetaileCommande> commandedetails = service.getDetaileCommandebyidcommande(idcom);
 //                Platform.runLater(() -> {
-//                    clientList.clear();
+//                    detailList.clear();
 //
 //                    try {
 //                        //clientList.clear();
 //
 //
-//                        for (ma.ensa.project.entity.Client client : clients) {
+//                        for (DetaileCommande d : commandedetails) {
 //
-//                            int id = client.getUserId();
-//                            UserService userService=new UserService();
-//                            User user1=userService.getUser(id);
+//                            int id = d.getIdProduit();
+//                            ProduitService produitService=new ProduitService();
+//
 //
 //
 //                            Client.ClientModel clientModel = new Client.ClientModel(
@@ -488,9 +378,6 @@ public class detail {
 //
 //
 //    }
-//    int idcom;
-//    public void ajouteid(int id){
-//        idcom=id;
-//
-//    }
+
+
 }

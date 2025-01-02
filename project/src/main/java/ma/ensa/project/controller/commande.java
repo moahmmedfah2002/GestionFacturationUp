@@ -25,6 +25,7 @@ import ma.ensa.project.entity.*;
 import ma.ensa.project.entity.Client;
 import ma.ensa.project.service.ClientService;
 import ma.ensa.project.service.CommandeService;
+import ma.ensa.project.service.FactureService;
 import ma.ensa.project.service.UserService;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -38,6 +39,7 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 public class commande {
+
     @FXML
     public Button userBtn =new Button();
 
@@ -55,6 +57,7 @@ public class commande {
         private Button delete;
         private Button update;
         private Button detailscommande;
+        private Button ajoutefacture;
         private Boolean s;
 
         // Constructeur
@@ -81,6 +84,44 @@ public class commande {
             this.delete.setId(id);
             this.detailscommande=new Button("details ");
             this.detailscommande.setId(id);
+            this.ajoutefacture=new Button("ajoutefacture");
+            this.ajoutefacture.setId(id);
+            this.ajoutefacture.setOnAction(event->{
+
+                try {
+                    facture=new Facture();
+                     factureService=new FactureService();
+
+                    int idfa= Integer.parseInt(ajoutefacture.getId());
+
+                    User user2=userService.getSession();
+
+                    facture.setIdCommande(idfa);
+                    facture.setIdUser(user2.getId());
+                    factureService.addFacture(facture);
+                    System.out.println(idfa);
+                    System.out.println(user2.getId());
+
+
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+
+
+
+
+
+
+
+
+            });
             this.detailscommande.setStyle("-fx-background-color: #808080;\n" +
                     "    -fx-text-fill: white;\n" +
                     "    -fx-padding: 5px 10px;");
@@ -266,6 +307,8 @@ public class commande {
     public detail d;
 
     public Button btnFull;
+    private Facture facture;
+    private  FactureService factureService;
     private UserService userService;
     private ClientService clientService;
     private static ObservableList<CommandeModel> commandeList = FXCollections.observableArrayList();
@@ -276,6 +319,8 @@ public class commande {
     private JFXTreeTableColumn<CommandeModel, Button> updateColumn=new JFXTreeTableColumn<>("update");
     @FXML
     private JFXTreeTableColumn<CommandeModel, Button> detailsColumn=new JFXTreeTableColumn<>("details");
+    @FXML
+    private  JFXTreeTableColumn<CommandeModel, Button> genrateColumn=new JFXTreeTableColumn<>("generate");
 
     private static CommandeService commandeDao;
     public commande() throws SQLException, ClassNotFoundException, IOException {
@@ -326,6 +371,7 @@ public class commande {
         commandeTable.getColumns().add(DeleteColumn);
         commandeTable.getColumns().add(updateColumn);
         commandeTable.getColumns().add(detailsColumn);
+        commandeTable.getColumns().add(genrateColumn);
         commandeTable.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
 
         update.start();
@@ -393,6 +439,7 @@ public class commande {
                         DeleteColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getDelete()));
                         updateColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getUpdate()));
                         detailsColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getDetailscommande()));
+                        genrateColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getAjoutefacture()));
 
 
 
