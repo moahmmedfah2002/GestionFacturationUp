@@ -97,7 +97,6 @@ public class addclient {
     }
 
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
         DashboardUser user = new DashboardUser();
 
         user.initialize(vbox.getScene());
@@ -108,7 +107,6 @@ public class addclient {
 
     }
     public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
         product produit = new product();
 
         produit.initialize(vbox.getScene());
@@ -119,7 +117,6 @@ public class addclient {
 
     }
     public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
         Paiement paiement = new Paiement();
 
         paiement.initialize(vbox.getScene());
@@ -130,7 +127,6 @@ public class addclient {
 
     }
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
         facture facture = new facture();
 
         facture.initialize(new Stage());
@@ -141,7 +137,6 @@ public class addclient {
 
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Client.Update.etat=false;
         ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
 
         commande.initialize(vbox.getScene());

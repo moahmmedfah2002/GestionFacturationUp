@@ -13,7 +13,7 @@
             <children>
                 <Label styleClass="dashboard-title" text="Client" />
                 <Button styleClass="nav-button" text="Users" onAction="#user"/>
-                <Button styleClass="nav-button" text="Clients" onAction="#client"/>
+                <Button styleClass="nav-button" text="Clients" />
                 <Button styleClass="nav-button" text="Produits" onAction="#produit" />
                 <Button styleClass="nav-button" text="Commandes" onAction="#commande"/>
                 <Button styleClass="nav-button" text="Paiements" onAction="#Paiement"/>

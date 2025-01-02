@@ -198,14 +198,17 @@ public class AjouterCommande {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage=new Stage();
                 stage.setScene(scene);
+                scene.setFill(Color.TRANSPARENT);
+                stage.initStyle(StageStyle.TRANSPARENT);
                 stage.show();
+                stage.setResizable(false);
+                stage.setFullScreen(true);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
     }
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        commande.Update.etat=false;
         DashboardUser user = new DashboardUser();
 
         user.initialize(vbox.getScene());
@@ -216,7 +219,6 @@ public class AjouterCommande {
 
     }
     public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        commande.Update.etat=false;
         product produit = new product();
 
         produit.initialize(vbox.getScene());
@@ -227,7 +229,6 @@ public class AjouterCommande {
 
     }
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        commande.Update.etat=false;
         facture facture = new facture();
 
         facture.initialize(new Stage());
@@ -239,7 +240,6 @@ public class AjouterCommande {
 
     }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        ma.ensa.project.controller.Client.Update.etat=false;
         ma.ensa.project.controller.commande commande= new ma.ensa.project.controller.commande();
 
         commande.initialize(vbox.getScene());
@@ -251,7 +251,6 @@ public class AjouterCommande {
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        ma.ensa.project.controller.commande.Update.etat=false;
         ma.ensa.project.controller.Client client1= new ma.ensa.project.controller.Client();
 
         client1.initialize(vbox.getScene());
@@ -262,7 +261,6 @@ public class AjouterCommande {
 
     }
     public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        commande.Update.etat=false;
         Paiement paiement = new Paiement();
 
         paiement.initialize(vbox.getScene());
