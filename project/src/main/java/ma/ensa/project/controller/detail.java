@@ -105,6 +105,18 @@ public class detail {
 
 
     }
+    public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
+        Client c= new Client();
+
+        c.initialize(vbox.getScene());
+
+        this.detailTable.getScene().getWindow().hide();
+
+
+
+    }
+
     public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
 
         product produit = new product();

@@ -389,7 +389,7 @@ public   JFXTreeTableColumn<CommandeModel, Object>  datepaiement=new JFXTreeTabl
 
     }
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         DashboardUser user = new DashboardUser();
 
         user.initialize(vbox.getScene());
@@ -400,7 +400,7 @@ public   JFXTreeTableColumn<CommandeModel, Object>  datepaiement=new JFXTreeTabl
 
     }
     public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         product produit = new product();
 
         produit.initialize(vbox.getScene());
@@ -411,7 +411,7 @@ public   JFXTreeTableColumn<CommandeModel, Object>  datepaiement=new JFXTreeTabl
 
     }
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         facture facture = new facture();
 
 
@@ -426,7 +426,7 @@ public   JFXTreeTableColumn<CommandeModel, Object>  datepaiement=new JFXTreeTabl
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         ma.ensa.project.controller.Client client1= new ma.ensa.project.controller.Client();
 
         client1.initialize(vbox.getScene());
@@ -435,6 +435,22 @@ public   JFXTreeTableColumn<CommandeModel, Object>  datepaiement=new JFXTreeTabl
 
 
 
+    }
+    public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
+        ma.ensa.project.controller.Paiement paiement= new ma.ensa.project.controller.Paiement();
+
+        paiement.initialize(vbox.getScene());
+
+        this.commandeTable.getScene().getWindow().hide();
+    }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
+        commande c= new commande();
+
+        c.initialize(vbox.getScene());
+
+        this.commandeTable.getScene().getWindow().hide();
     }
 
     @FXML

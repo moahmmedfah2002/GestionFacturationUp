@@ -17,7 +17,7 @@
         <VBox prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
            <children>
                <Label styleClass="dashboard-title" text="Dashboard" />
-               <Button styleClass="nav-button" fx:id="userBtn" text="Users" />
+
                <Button styleClass="nav-button" text="Clients" onAction="#client" />
                <Button styleClass="nav-button" text="Produits" onAction="#produit" />
                <Button styleClass="nav-button" text="Commandes" onAction="#commande"/>
@@ -47,8 +47,8 @@
                <children>
                    <Label styleClass="section-title" text="Liste des Utilisateurs"/>
                    <Region HBox.hgrow="ALWAYS"/>
-                   <TextField promptText="🔍 Rechercher un utilisateur..." styleClass="search-field"/>
-                   <Button  styleClass="add-button">
+
+                   <Button  styleClass="add-button" onAction="#adduser">
                        <graphic>
                            <HBox alignment="CENTER" spacing="5">
                                <children>

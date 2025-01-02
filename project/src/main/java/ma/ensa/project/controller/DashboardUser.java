@@ -226,7 +226,7 @@ public class DashboardUser {
 
     }
     public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        facture.Update.etat=false;
+
         product facture = new product();
 
         facture.initialize(vbox.getScene());
@@ -237,7 +237,7 @@ public class DashboardUser {
 
     }
     public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         Client client = new Client();
 
         client.initialize(vbox.getScene());
@@ -248,7 +248,7 @@ public class DashboardUser {
 
     }
     public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         product produit = new product();
 
         produit.initialize(vbox.getScene());
@@ -258,8 +258,13 @@ public class DashboardUser {
 
 
     }
+    public void adduser(ActionEvent actionEvent)throws SQLException, IOException, ClassNotFoundException{
+        AddUser addUser=new AddUser();
+        addUser.start(vbox.getScene());
+        this.userTable.getScene().getWindow().hide();
+    }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         commande commande = new commande();
 
         commande.initialize(vbox.getScene());
@@ -270,7 +275,7 @@ public class DashboardUser {
 
     }
     public void Paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        Update.etat=false;
+
         Paiement paiement = new Paiement();
 
         paiement.initialize(vbox.getScene());

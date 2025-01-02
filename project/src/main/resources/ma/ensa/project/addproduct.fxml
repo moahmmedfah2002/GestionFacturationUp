@@ -11,12 +11,12 @@
     <left>
         <VBox prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
             <children>
-                <Label styleClass="dashboard-title" text="Client" />
+                <Label styleClass="dashboard-title" text="Produit" />
                 <Button styleClass="nav-button" text="Users" onAction="#user"/>
                 <Button styleClass="nav-button" text="Clients" onAction="#client"/>
                 <Button styleClass="nav-button" text="Produits" onAction="#produit" />
                 <Button styleClass="nav-button" text="Commandes" onAction="#commande"/>
-                <Button styleClass="nav-button" text="Paiements" />
+                <Button styleClass="nav-button" text="Paiements" onAction="#paiement" />
                 <Button styleClass="nav-button" text="Factures"  onAction="#facture" />
                 <Button styleClass="nav-button"  onAction="#cancel"  />
 

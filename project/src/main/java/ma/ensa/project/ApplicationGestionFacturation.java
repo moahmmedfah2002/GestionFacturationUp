@@ -18,7 +18,7 @@ public class ApplicationGestionFacturation extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        commande login = new commande();
+        addclient login = new addclient();
         login.initialize(primaryStage.getScene());
     }
 

@@ -9,6 +9,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -59,6 +60,7 @@ public class AjouterCommande {
     private Button addCommandeBtn;
     @FXML
     private ComboBox<String> produitComboBox1;
+
 
     private final ProduitService produitService = new ProduitService();
     private final ClientService clientService=new ClientService();
@@ -215,7 +217,8 @@ public class AjouterCommande {
 
         user.initialize(vbox.getScene());
 
-        this.ajoutercommandeTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -225,7 +228,8 @@ public class AjouterCommande {
 
         produit.initialize(vbox.getScene());
 
-        this.ajoutercommandeTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -235,7 +239,8 @@ public class AjouterCommande {
 
         facture.initialize(new Stage());
 
-        this.ajoutercommandeTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -246,7 +251,8 @@ public class AjouterCommande {
 
         commande.initialize(vbox.getScene());
 
-        this.ajoutercommandeTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -257,7 +263,8 @@ public class AjouterCommande {
 
         client1.initialize(vbox.getScene());
 
-        this.ajoutercommandeTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -267,7 +274,8 @@ public class AjouterCommande {
 
         paiement.initialize(vbox.getScene());
 
-        this.ajoutercommandeTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 

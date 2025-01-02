@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -95,7 +96,8 @@ public class addproduct {
         produit.initialize(vbox.getScene());
 
         // Cacher la fenêtre actuelle
-        this.addproduitTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
     }
 
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
@@ -104,7 +106,8 @@ public class addproduct {
 
         commande.initialize(vbox.getScene());
 
-        this.addproduitTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -114,7 +117,8 @@ public class addproduct {
 
         produit.initialize(vbox.getScene());
 
-        this.addproduitTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -125,7 +129,8 @@ public class addproduct {
 
         facture.initialize(new Stage());
 
-        this.addproduitTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -136,7 +141,8 @@ public class addproduct {
 
         user.initialize(vbox.getScene());
 
-        this.addproduitTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -147,10 +153,17 @@ public class addproduct {
 
         client.initialize(vbox.getScene());
 
-        this.addproduitTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
+    }
+    public  void paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Paiement paiement=new Paiement();
+        paiement.initialize(vbox.getScene());
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
     }
 
     public void full(Event mouseEvent) {

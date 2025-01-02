@@ -5,8 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -15,6 +17,7 @@ import ma.ensa.project.entity.User;
 import ma.ensa.project.service.UserService;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +61,8 @@ public class AddUser {
     @FXML private CheckBox deletePaiementCheck;
 
     @FXML private CheckBox mailCheck;
+    @FXML
+    public VBox vbox= new VBox();
 
     private ObservableList<String> list = FXCollections.observableArrayList("Admin", "User");
     private UserService userService;
@@ -72,6 +77,7 @@ public class AddUser {
 
         }
     }
+
 
     private void updatePermissionsBasedOnRole(String role) {
         if (role == null) return;
@@ -255,6 +261,72 @@ public class AddUser {
             this.permissions = permissions;
         }
     }
+    public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
+        commande commande = new commande();
+
+        commande.initialize(vbox.getScene());
+
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
+
+
+
+    }
+    public void produit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        product produit = new product();
+
+        produit.initialize(vbox.getScene());
+
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
+
+
+
+    }
+    public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        facture facture = new facture();
+
+
+        facture.initialize(new Stage());
+
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
+
+
+
+    }
+    public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
+        DashboardUser user = new DashboardUser();
+
+        user.initialize(vbox.getScene());
+
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
+
+
+
+    }
+    public void client(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+
+        Client client = new Client();
+
+        client.initialize(vbox.getScene());
+
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
+
+
+
+    }
+    public  void paiement(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        Paiement paiement=new Paiement();
+        paiement.initialize(vbox.getScene());
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
+    }
+
 
     @FXML
     public void start(Scene scene) throws IOException {
