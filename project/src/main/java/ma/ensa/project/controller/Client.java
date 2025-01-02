@@ -312,9 +312,10 @@ public class Client{
 
 
     public class Update extends Thread{
+        public static Object mutex = new Object();
 
         public void loadClient() throws SQLException {
-            //clientList.clear();
+
             // public void loadClient() throws SQLException {
             clientList.clear();
 
@@ -394,7 +395,7 @@ public class Client{
 
 
                     loadClient();
-                    sleep(3000);
+                    sleep(30000);
 
 
 

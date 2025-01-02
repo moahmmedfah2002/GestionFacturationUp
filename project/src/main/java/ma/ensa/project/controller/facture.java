@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import io.github.palexdev.mfxcore.controls.Label;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -15,27 +14,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.Data;
 import ma.ensa.project.ApplicationGestionFacturation;
 import javafx.scene.layout.VBox;
+import ma.ensa.project.entity.DetaileCommande;
 import ma.ensa.project.entity.Facture;
 import ma.ensa.project.entity.Produit;
 import ma.ensa.project.entity.User;
-import ma.ensa.project.service.FactureService;
-import ma.ensa.project.service.ProduitService;
-import ma.ensa.project.service.UserService;
+import ma.ensa.project.service.*;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class facture {
 
@@ -59,6 +61,8 @@ public class facture {
 
         private Button delete;
         private Button update;
+        private Button commandeBtn= new Button("Commande");
+
 
         // Constructeur
         public FactureModel(String id, Object com, Object cli,Object us) {
@@ -68,10 +72,13 @@ public class facture {
             this.commande = com;
             this.UserName=us;
 
+
             this.delete=new Button("Delete");
             this.delete.setId(id);
-            this.update=new Button("Update");
+            this.update=new Button("PDF");
             this.update.setId(id);
+            commandeBtn.setId(id);
+            commandeBtn.setText("commande");
             this.update.setStyle("-fx-background-color: #27ae60;\n" +
                     "    -fx-text-fill: white;\n" +
                     "    -fx-padding: 5px 10px;");
@@ -79,23 +86,135 @@ public class facture {
                     "    -fx-text-fill: white;\n" +
                     "    -fx-padding: 5px 10px;");
             System.out.println("id: "+delete.getId());
-            this.update.setOnAction(event -> {
-
-
-                if(product.Update.etat) {
-
-                    Update.etat = false;
+            this.update.setOnAction(_ -> {
+                try {
 
 
 
+                DetaileCommandeService detaileCommandeService= null;
+
+                    detaileCommandeService = new DetaileCommandeService();
+
+                    CommandeService commandeService = new CommandeService();
+                    ClientService clientService = new ClientService();
+                    ma.ensa.project.entity.Client c = clientService.getClient(commandeService.getCommande(Integer.parseInt(String.valueOf(com))).getClient());
+
+
+                    List<DetaileCommande> detaileCommandes= null ;
+                    detaileCommandes = detaileCommandeService.getDetaileCommandebyidcommande(Integer.parseInt(String.valueOf(com)));
+                    List<Produit>produits=new ArrayList<>();
+                    for(DetaileCommande detaileCommande : detaileCommandes) {
+                        ProduitService produitService = new ProduitService();
+                        Produit produit=new Produit();
+                        produit.setId(detaileCommande.getIdProduit());
+                        produit=produitService.getProduit(produit.getId());
+                        produits.add(produit);
+
+                    }
+
+
+                    try (PDDocument document = new PDDocument()) {
+                        PDPage page = new PDPage();
+                        document.addPage(page);
+
+                        try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+
+
+//                 Add Invoice Header
+
+                            contentStream.beginText();
+                            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 20);
+                            contentStream.newLineAtOffset(220, 750); // X, Y coordinates
+                            contentStream.showText("Facture");
+                            contentStream.endText();
 
 
 
-                }else {
+                            // Add Client Details
+                            contentStream.beginText();
+                            contentStream.setFont(PDType1Font.HELVETICA, 12);
+                            contentStream.newLineAtOffset(50, 640);
+                            contentStream.showText("Client Name: " + cli);
+                            contentStream.newLineAtOffset(0, -15);
+                            contentStream.showText("Address: " + c.getAdresse());
+                            contentStream.newLineAtOffset(0, -15);
+                            contentStream.showText("Contact: " + c.getTelephone());
+
+                            contentStream.endText();
+
+                            // Add Invoice Details
+                            contentStream.beginText();
+                            contentStream.setFont(PDType1Font.HELVETICA, 12);
+                            contentStream.newLineAtOffset(400, 700);
+                            contentStream.showText("Invoice #: " + id);
+                            contentStream.newLineAtOffset(0, -15);
+                            contentStream.showText("Date: " + LocalDate.now().toString());
+                            contentStream.endText();
+
+                            // Add Table Header
+                            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                            contentStream.beginText();
+                            contentStream.newLineAtOffset(50, 580);
+                            contentStream.showText("Item");
+                            contentStream.newLineAtOffset(200, 0);
+                            contentStream.showText("Quantity");
+                            contentStream.newLineAtOffset(100, 0);
+                            contentStream.showText("Price");
+                            contentStream.newLineAtOffset(100, 0);
+                            contentStream.showText("Total");
+                            contentStream.endText();
+
+                            // Add Table Rows (Example Items)
+                            int yPosition = 560; // Start position
 
 
 
-                }
+                            List<String[]> items =new ArrayList<>();
+                            float somme=0;
+                            for(Produit p  :produits  ){
+
+                                float quantite=detaileCommandes.stream().filter((e)->e.getIdProduit()==p.getId()).toList().getFirst().getIdProduit();
+                                items.add(new String[]{"Product " + p.getNom(), String.valueOf(quantite), String.valueOf(p.getPrix()), String.valueOf(quantite*p.getPrix()*(p.getTva()/100))});
+                                somme+=quantite*p.getPrix()*(p.getTva()/100);
+                            }
+
+                            contentStream.setFont(PDType1Font.HELVETICA, 12);
+                            for (String[] item : items) {
+                                contentStream.beginText();
+                                contentStream.newLineAtOffset(50, yPosition);
+                                contentStream.showText(item[0]);
+                                contentStream.newLineAtOffset(200, 0);
+                                contentStream.showText(item[1]);
+                                contentStream.newLineAtOffset(100, 0);
+                                contentStream.showText(item[2]);
+                                contentStream.newLineAtOffset(100, 0);
+                                contentStream.showText(item[3]);
+                                contentStream.endText();
+                                yPosition -= 20; // Move to the next row
+                            }
+
+                            // Add Total Amount
+                            contentStream.beginText();
+                            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                            contentStream.newLineAtOffset(350, yPosition - 20);
+                            contentStream.showText("Grand Total: " + somme);
+                            contentStream.endText();
+                        }
+
+                        // Save the PDF to a file
+                        document.save("C:\\Users\\pc\\Documents\\java2\\GestionFacturationCopie\\project\\src\\main\\resources\\ma\\ensa\\project\\facture.pdf");
+                        System.out.println("pdf :: facture1.pdf !!!!!!!!!!!1");
+                        System.out.println("Invoice PDF created successfully!");
+
+
+                        MailService mailService = new MailService();
+                        mailService.send(c.getEmail(), "Facture", "your facture is :", "C:\\Users\\pc\\Documents\\java2\\GestionFacturationCopie\\project\\src\\main\\resources\\ma\\ensa\\project\\facture.pdf");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
 
             });
             this.delete.setOnAction(event -> {
@@ -105,10 +224,12 @@ public class facture {
 
 
                 try {
-                    factureDao.deleteFacture(Integer.parseInt(delete.getId()));
+                    Facture facture1 = new Facture();
+                    facture1.setId(Integer.parseInt(delete.getId()));
+                    factureDao.deleteFacture(facture1.getId());
                     System.out.println(Integer.parseInt(delete.getId()));
                     Update update=new Update();
-                    update.loadProduit();
+                    update.loadFacture();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -129,7 +250,6 @@ public class facture {
 
     @FXML
     public JFXTreeTableColumn<FactureModel, Object> user=new JFXTreeTableColumn<>("username");
-
     @FXML
     public Button btnClose;
     public Button btnFull;
@@ -166,16 +286,7 @@ public class facture {
 
     }
 
-    public void facture(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        facture facture = new facture();
 
-        facture.initialize(new Stage().getScene());
-
-        this.factureTable.getScene().getWindow().hide();
-
-
-
-    }
     public void commande(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
 
 
@@ -217,10 +328,9 @@ public class facture {
 
         factureDao = new FactureService();
         factureList = FXCollections.observableArrayList();
-        ProduitService ProduitService=new ProduitService();
+        factureDao=new FactureService();
         Update update = new Update();
-        update.loadProduit();
-
+        update.loadFacture();
         factureTable.getColumns().add(id);
         factureTable.getColumns().add(user);
         factureTable.getColumns().add(client);
@@ -254,7 +364,7 @@ public class facture {
 
     }
     public class Update extends Thread{
-        public void loadProduit() throws SQLException {
+        public void loadFacture() throws SQLException {
             factureList.clear();
             try {
                 // Vider la liste existante
@@ -274,21 +384,23 @@ public class facture {
                             int id = facture.getId();
 
                             UserService userService=new UserService();
-                            User user1=userService.getUser(id);
+                            User user1=userService.getUser(userService.getSession().getId());
 
-
+                            CommandeService commandeService=new CommandeService();
+                            ClientService clientService=new ClientService();
+                            System.out.println("nom :: "+clientService.getClient(facture.getIdCommande()).getNom());
                             FactureModel factureModel = new FactureModel(
                                     String.valueOf(facture.getId()),
-                                    facture.getCommande(),
-                                    facture.getClientId(),
+                                    facture.getIdCommande(),
+                                    clientService.getClient(commandeService.getCommande(facture.getIdCommande()).getClient()).getNom(),
 
-                                    user1.getNomUtilisateur()
+                                    userService.getUser(user1.getId()).getNomUtilisateur()
 
 
 
                             );
 
-
+                            System.out.println("ccc"+factureModel.getId());
                             factureList.add(factureModel);
 
 
@@ -301,7 +413,7 @@ public class facture {
                         id.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getId()));
                         user.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getUserName()));
                         client.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getClient()));
-                        commande.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getId()));
+                        commande.setCellValueFactory(cellData ->  new SimpleObjectProperty<>(cellData.getValue().getValue().getCommandeBtn()));
 
 
                         DeleteColumn.setCellValueFactory(cellData->new SimpleObjectProperty<>(cellData.getValue().getValue().getDelete()));
@@ -331,7 +443,7 @@ public class facture {
                 try {
 
 
-                    loadProduit();
+                    loadFacture();
                     sleep(3000);
 
 

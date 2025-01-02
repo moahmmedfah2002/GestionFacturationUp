@@ -87,15 +87,14 @@ public class FactureService implements FactureRepo {
 //
 //    }
 
-//    @Override
-//    public boolean deleteFacture(int id) throws SQLException {
-//
-//        String sql="delete from Facture where idFacture=?";
-//        PreparedStatement str=con.prepareStatement(sql);
-//        str.setInt(1,id);
-//        return str.executeUpdate()>0;
-//
-//    }
+    public boolean deleteFacture(int id) throws SQLException {
+
+        String sql="delete from facture where id=?";
+        PreparedStatement str=con.prepareStatement(sql);
+        str.setInt(1,id);
+        return str.executeUpdate()>0;
+
+    }
 
 //    @Override
 //    public boolean updateFacture(Facture facture) throws SQLException {

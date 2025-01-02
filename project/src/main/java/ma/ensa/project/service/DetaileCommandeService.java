@@ -80,7 +80,7 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
     }
     public List<DetaileCommande> getDetaileCommandebyidcommande(int id) throws SQLException {
         List<DetaileCommande> Detail=new ArrayList<>();
-        PreparedStatement ps=con.prepareCall("SELECT * FROM DetailCommande where idCommande=?");
+        PreparedStatement ps=con.prepareCall("SELECT * FROM detailcommande where idCommande=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
         DetaileCommande detailecommande=new DetaileCommande();
@@ -88,6 +88,7 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
             detailecommande.setIdcommande(rs.getInt("idcommande"));
             detailecommande.setQuantite(rs.getInt("quantite"));
             detailecommande.setId(rs.getInt("id"));
+            detailecommande.setIdProduit(rs.getInt("idProduit"));
             Detail.add(detailecommande);
 
         }

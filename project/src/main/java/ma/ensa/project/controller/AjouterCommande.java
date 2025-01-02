@@ -284,7 +284,6 @@ public class AjouterCommande {
     public void close(ActionEvent mouseEvent) throws Throwable {
 
         Stage stage = (Stage) btnClose.getScene().getWindow();
-        ma.ensa.project.controller.Client.Update.etat=false;
         stage.hide();
 
 

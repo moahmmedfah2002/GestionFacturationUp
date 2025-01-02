@@ -64,7 +64,7 @@ public class ProduitService implements ProduitRepo {
     @Override
     public Produit getProduit(int id) throws SQLException {
 
-        String sql="Select * from Produit where id=?";
+        String sql="Select * from produit where id=?";
         PreparedStatement str=con.prepareStatement(sql);
         str.setInt(1,id);
         ResultSet rs=str.executeQuery();
