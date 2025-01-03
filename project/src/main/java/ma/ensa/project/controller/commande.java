@@ -245,7 +245,7 @@ public class commande {
                             update.setText("Update");
                             Commande commande= new Commande();
                             commande.setId(Integer.parseInt(id));
-                            commande.setCommandeDate(Date.valueOf(((DatePicker)commandeda).getValue()));
+                            commande.setCommandeDate(Date.valueOf(((DatePicker) commandeda).getValue()));
                             commande.setTotalAmount(Float.parseFloat(((TextField)total).getText()));
                             commande.setClient(clien.getId());
                             System.out.println(s);
