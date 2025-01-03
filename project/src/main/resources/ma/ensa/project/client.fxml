@@ -20,7 +20,7 @@
 
 
             <Button styleClass="nav-button" text="Users" fx:id="userbtn"  onAction="#user" />
-            <Button styleClass="nav-button" fx:id="clientbtn" text="Clients" />
+
             <Button styleClass="nav-button" fx:id="produitbtn" text="Produits" onAction="#produit"/>
             <Button styleClass="nav-button" fx:id="commandebtn" text="Commandes" onAction="#commande"/>
             <Button styleClass="nav-button" fx:id="paiementbtn" text="Paiements" onAction="#Paiement" />

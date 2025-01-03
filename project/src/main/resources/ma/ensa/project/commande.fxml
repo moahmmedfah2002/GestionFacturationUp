@@ -20,7 +20,6 @@
                 <Button styleClass="nav-button" text="Users" fx:id="userBtn"  onAction="#user" />
                 <Button styleClass="nav-button" text="Clients"  onAction="#client"/>
                 <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
-                <Button styleClass="nav-button" text="Commandes" />
                 <Button styleClass="nav-button" text="Paiements" onAction="#Paiement"/>
                 <Button styleClass="nav-button" text="Factures" onAction="#facture"/>
                 <VBox prefHeight="50.0" prefWidth="100.0" />
@@ -47,7 +46,7 @@
                         <children>
                             <Label styleClass="section-title" text="Liste des Commande"/>
                             <Region HBox.hgrow="ALWAYS"/>
-                            <TextField promptText="🔍 Rechercher un utilisateur..." styleClass="search-field"/>
+
                             <Button  fx:id="btnAjouter" onAction="#ajouterCommande" styleClass="add-button">
                                 <graphic>
                                     <HBox alignment="CENTER" spacing="5">

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -43,7 +44,7 @@ public class addclient {
 
 
     @FXML
-    public JFXTreeTableView<product.ProduitModel> addclientTable= new JFXTreeTableView<>();
+    public JFXTreeTableView<Client.ClientModel> addclientTable= new JFXTreeTableView<>();
 
 
 
@@ -95,7 +96,8 @@ public class addclient {
         client.initialize(vbox.getScene());
 
         // Cacher la fenêtre actuelle
-        this.addclientTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
     }
 
     public void user(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
@@ -103,7 +105,8 @@ public class addclient {
 
         user.initialize(vbox.getScene());
 
-        this.addclientTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -113,7 +116,8 @@ public class addclient {
 
         produit.initialize(vbox.getScene());
 
-        this.addclientTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -123,7 +127,8 @@ public class addclient {
 
         paiement.initialize(vbox.getScene());
 
-        this.addclientTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -133,7 +138,8 @@ public class addclient {
 
         facture.initialize(new Stage().getScene());
 
-        this.addclientTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
@@ -143,7 +149,8 @@ public class addclient {
 
         commande.initialize(vbox.getScene());
 
-        this.addclientTable.getScene().getWindow().hide();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.hide();
 
 
 
