@@ -16,7 +16,7 @@
     <left>
         <VBox fx:id="vbox" prefHeight="530.0" prefWidth="250.0" styleClass="sidebar">
             <children>
-                <Label styleClass="dashboard-title" text="Commande" />
+                <Label styleClass="dashboard-title" text="Facture" />
                 <Button styleClass="nav-button" text="Users" onAction="#user" />
                 <Button styleClass="nav-button" text="Clients"  onAction="#client"/>
                 <Button styleClass="nav-button" text="Produits" onAction="#produit"/>
@@ -90,7 +90,7 @@
 
                         </columns>
                         <placeholder>
-                            <Label styleClass="empty-table-label" text="Aucun commande trouvé"/>
+                            <Label styleClass="empty-table-label" text="Aucun facture trouvé"/>
                         </placeholder>
                     </JFXTreeTableView>
                 </VBox>

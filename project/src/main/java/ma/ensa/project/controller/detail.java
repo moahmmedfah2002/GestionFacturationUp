@@ -143,7 +143,7 @@ public class detail {
 
         facture facture = new facture();
 
-        facture.initialize(new Stage());
+        facture.initialize(new Stage().getScene());
 
         this.detailTable.getScene().getWindow().hide();
 

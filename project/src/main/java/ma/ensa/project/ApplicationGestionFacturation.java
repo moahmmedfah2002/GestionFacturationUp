@@ -18,8 +18,8 @@ public class ApplicationGestionFacturation extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        commande login = new commande();
-        login.initialize(primaryStage.getScene());
+        Login login = new Login();
+        login.initialize(primaryStage);
     }
 
     public static void main(String[] args) {
