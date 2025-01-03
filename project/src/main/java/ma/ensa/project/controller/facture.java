@@ -174,8 +174,8 @@ public class facture {
                             for(Produit p  :produits  ){
 
                                 float quantite=detaileCommandes.stream().filter((e)->e.getIdProduit()==p.getId()).toList().getFirst().getIdProduit();
-                                items.add(new String[]{"Product " + p.getNom(), String.valueOf(quantite), String.valueOf(p.getPrix()), String.valueOf(quantite*p.getPrix()*(p.getTva()/100))});
-                                somme+=quantite*p.getPrix()*(p.getTva()/100);
+                                items.add(new String[]{"Product " + p.getNom(), String.valueOf(quantite), String.valueOf(p.getPrix()), String.valueOf(quantite*p.getPrix()*((p.getTva()/100)+1))});
+                                somme+=quantite*p.getPrix()*((p.getTva()/100)+1);
                             }
 
                             contentStream.setFont(PDType1Font.HELVETICA, 12);
