@@ -340,7 +340,7 @@ public class facture {
 
 
 
-        update.start();
+        update.loadFacture();
 
     }
     public void full(Event mouseEvent) {

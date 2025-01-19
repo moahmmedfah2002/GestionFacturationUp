@@ -85,21 +85,11 @@ public class product {
 
 
 
-                    nom.setCellValueFactory(cellData -> new SimpleObjectProperty<>(name));
 
-                    prix.setCellValueFactory(cellData -> new SimpleObjectProperty<>(p));
-                    quantitedispo.setCellValueFactory(cellData -> new SimpleObjectProperty<>(quanti));
-                    tva.setCellValueFactory(cellData -> new SimpleObjectProperty<>(tv));
                     update.setText("ok");
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
 
 
-                    TreeItem<ProduitModel> root = new RecursiveTreeItem<>(produitList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-
-                    produitTable.setRoot(root);
-                    Update update1 = new Update();
-
+                  produitTable.refresh();
 
                 }else {
 
@@ -119,13 +109,12 @@ public class product {
                     }
                     Update.etat = true;
                     Update update1 = new Update();
-                    update1.start();
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-
-                    TreeItem<ProduitModel> root = new RecursiveTreeItem<>(produitList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    produitTable.setRoot(root);
-
+                    try {
+                        update1.loadProduit();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                   produitTable.refresh();
 
 
                 }
@@ -264,7 +253,7 @@ public class product {
         produitTable.getColumns().add(tva);
         produitTable.getColumns().add(DeleteColumn);
         produitTable.getColumns().add(updateColumn);
-        update.start();
+        update.loadProduit();
 
     }
     public void full(Event mouseEvent) {

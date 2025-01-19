@@ -164,8 +164,12 @@ public class Commandenonpay {
 
                             Update.etat = true;
                                 Update update1 = new Update();
-                                update1.start();
-                                payColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(validate));
+                            try {
+                                update1.loadCommande();
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                            payColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(validate));
 
                                 TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
 //                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
@@ -257,7 +261,7 @@ public   JFXTreeTableColumn<CommandeModel, Object>  datepaiement=new JFXTreeTabl
         commandeTable.getColumns().add(payColumn);
 
 
-        update.start();
+        update.loadCommande();
 
     }
     public class Update extends Thread{

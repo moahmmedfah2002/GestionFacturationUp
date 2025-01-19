@@ -87,7 +87,7 @@ public class Login {
             commande dashboardUser = new commande();
             FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("commande.fxml"));
             scene = new Scene(fxmlLoader.load());
-            dashboardUser.initialize(scene);
+            dashboardUser.initialize(vbox.getScene());
             Stage stage = (Stage) vbox.getScene().getWindow();
             stage.hide();
         }else {

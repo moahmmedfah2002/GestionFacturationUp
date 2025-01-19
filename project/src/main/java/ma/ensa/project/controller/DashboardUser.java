@@ -129,7 +129,7 @@ public class DashboardUser {
         userTable.getColumns().add(roleColumn);
 
 
-        update.start();
+        update.loadUsers();
 
     }
 

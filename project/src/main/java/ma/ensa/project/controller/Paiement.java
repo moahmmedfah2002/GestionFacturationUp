@@ -84,15 +84,9 @@ public class Paiement {
 
 
 
-                    date.setCellValueFactory(cellData -> new SimpleObjectProperty<>(da));
 
                     update.setText("ok");
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-
-                    TreeItem<PaiementModel> root = new RecursiveTreeItem<>(paiementList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    paiementTable.setRoot(root);
-                    Update update1 = new Update();
+                    paiementTable.refresh();
 
 
                 }else {
@@ -112,12 +106,12 @@ public class Paiement {
                     }
                     Update.etat = true;
                     Update update1 = new Update();
-                    update1.start();
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-
-                    TreeItem<PaiementModel> root = new RecursiveTreeItem<>(paiementList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    paiementTable.setRoot(root);
+                    try {
+                        update1.loadPaiement();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                   paiementTable.refresh();
 
 
 
@@ -247,7 +241,7 @@ public class Paiement {
 
         paiementTable.getColumns().add(DeleteColumn);
         paiementTable.getColumns().add(updateColumn);
-        update.start();
+        update.loadPaiement();
 
     }
     public void full(Event mouseEvent) {

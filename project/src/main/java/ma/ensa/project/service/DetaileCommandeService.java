@@ -58,14 +58,14 @@ public class DetaileCommandeService implements DetaileCommandeRepo {
 
     @Override
     public boolean deleteDetaileCommande(int id) throws SQLException {
-        PreparedStatement ps=con.prepareCall("DELETE DetaileCommande where id=?");
-        ps.setInt(2,id);
+        PreparedStatement ps=con.prepareCall("DELETE FROM detailcommande where id=?");
+        ps.setInt(1,id);
         return ps.executeUpdate()!=0;
     }
 
     @Override
     public DetaileCommande getDetaileCommande(int id) throws SQLException {
-        PreparedStatement ps=con.prepareCall("SELECT * FROM DetailCommande where id=?");
+        PreparedStatement ps=con.prepareCall("SELECT * FROM detailcommande where id=?");
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
         DetaileCommande detailecommande=new DetaileCommande();

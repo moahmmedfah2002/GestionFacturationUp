@@ -60,9 +60,10 @@ public class commande {
         private Button detailscommande;
         private Button ajoutefacture;
         private Boolean s;
+        private int num;
 
         // Constructeur
-        public CommandeModel(String id, Object c, Object to, Object cli,Object us,Object st) throws SQLException {
+        public CommandeModel(String id, Object c, Object to, Object cli,Object us,int num,Object st) throws SQLException {
 
             this.id=id;
 
@@ -105,21 +106,9 @@ public class commande {
 
 
 
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
+                } catch (SQLException | ClassNotFoundException | IOException e) {
                     throw new RuntimeException(e);
                 }
-
-
-
-
-
-
-
-
 
 
             });
@@ -202,30 +191,9 @@ public class commande {
                     commandeda = new DatePicker(LocalDate.parse(String.valueOf(commandeda)));
 
                     total = new TextField(String.valueOf(total));
-
-
-
-
-
-
-
-
-
-
-                    commandedate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(commandeda));
-
-                    totalamount.setCellValueFactory(cellData -> new SimpleObjectProperty<>(total));
-                    client.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cl));
-                    user.setCellValueFactory(cellData -> new SimpleObjectProperty<>(UserName));
-                    status.setCellValueFactory(cellData -> new SimpleObjectProperty<>(statu));
                     update.setText("ok");
+                    commandeTable.refresh();
 
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-
-                    TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    commandeTable.setRoot(root);
-                    Update update1 = new Update();
 
 
                 }else {
@@ -257,12 +225,12 @@ public class commande {
 
                         Update.etat = true;
                         Update update1 = new Update();
-                        update1.start();
-                        updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-
-                        TreeItem<CommandeModel> root = new RecursiveTreeItem<>(commandeList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                        commandeTable.setRoot(root);
+                        try {
+                            update1.loadCommande();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        commandeTable.refresh();
                         try {
                             update1.loadCommande();
                         } catch (SQLException e) {
@@ -306,6 +274,7 @@ public class commande {
     public Label msg;
     @FXML
     public JFXTreeTableView<CommandeModel> commandeTable= new JFXTreeTableView<>();
+
     @FXML
     public JFXTreeTableColumn<CommandeModel, Object> commandedate= new JFXTreeTableColumn<>("commandedata");
     @FXML
@@ -347,24 +316,6 @@ public class commande {
             System.out.println(permission.getNom());
         }
 
-        if (user1.getRole().equals(Role.UTILISATEUR.toString())){
-            Thread t1=new Thread(()->{
-                try {
-                    sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                userBtn.setVisible(false);
-                System.out.println("thread  done");
-
-
-
-
-            });
-            t1.start();
-
-        }
 
         clientService=new ClientService();
         userService=new UserService();
@@ -390,7 +341,15 @@ public class commande {
         commandeTable.getColumns().add(genrateColumn);
         commandeTable.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
 
-        update.start();
+        update.loadCommande();
+
+
+
+
+
+
+
+
 
     }
     public class Update extends Thread{
@@ -401,13 +360,12 @@ public class commande {
 
 
 
-
                 // Convertir les Users en UserModels
                 List<Commande> commandes = commandeDao.getCommandes();
                 Platform.runLater(() -> {
                     try {
                         commandeList.clear();
-
+                        int i=0;
 
                         for (Commande commande : commandes) {
 
@@ -427,13 +385,14 @@ public class commande {
                                     commande.getCommandeDate(),
                                     commande.getTotalAmount(),
                                     client2.getNom(),
-                                    user1.getNomUtilisateur()
-
+                                    user1.getNomUtilisateur(),
+                                    i
                                     ,commande.isStatus()
 
 
 
                             );
+                            i++;
 
 
                             commandeList.add(commandeModel);
@@ -580,10 +539,21 @@ public class commande {
 
     @FXML
     public void initialize(Scene scene) throws IOException, SQLException {
+
+        double totalWidth = commandeTable.getWidth();
+        int columnCount = commandeTable.getColumns().size();
+        commandedate.prefWidthProperty().unbind();
+        commandedate.setMinWidth(totalWidth / columnCount);
+        commandeTable.refresh();
+        for (TreeTableColumn<CommandeModel, ?> column : commandeTable.getColumns()) {
+            column.prefWidthProperty().unbind();
+            column.setPrefWidth(100); // Fixed width for testing
+        }
+
         client.prefWidthProperty().bind(commandeTable.widthProperty().multiply(0.5));
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationGestionFacturation.class.getResource("commande.fxml"));
 
-        scene=new Scene(fxmlLoader.load());
+         scene=new Scene(fxmlLoader.load());
 
         Stage primaryStage =new Stage();
         primaryStage.initStyle(StageStyle.UNDECORATED);

@@ -178,7 +178,7 @@ public class detail {
 
         detailTable.getColumns().add(product);
         detailTable.getColumns().add(quan);
-        update.start();
+        update.loadDetail();
 
 
 

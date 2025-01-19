@@ -113,18 +113,11 @@ public class Client{
 
 
 
-                    nom.setCellValueFactory(cellData -> new SimpleObjectProperty<>(name));
 
-                    address.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Adress));
-                    email.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Email));
-                    telephone.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Telephone));
+
                     update.setText("ok");
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
 
-                    TreeItem<ClientModel> root = new RecursiveTreeItem<>(clientList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    clientTable.setRoot(root);
-                    Update update1 = new Update();
+                    clientTable.refresh();
 
 
                 }else {
@@ -142,15 +135,11 @@ public class Client{
                         clientDao.updateClient(client);
 
                         Update update1 = new Update();
-                        update1.start();
+                        update1.loadClient();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-                    updateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(update));
-
-                    TreeItem<ClientModel> root = new RecursiveTreeItem<>(clientList, RecursiveTreeObject::getChildren);
-//                        root.getChildren().forEach((e)->{ System.out.println(e.getValue().getName().get()); });
-                    clientTable.setRoot(root);
+                   clientTable.refresh();
                     Update update1 = new Update();
                     try {
                         update1.loadClient();
@@ -282,7 +271,7 @@ public class Client{
         clientTable.getColumns().add(user);
         clientTable.getColumns().add(DeleteColumn);
         clientTable.getColumns().add(updateColumn);
-        update.start();
+        update.loadClient();
 
             }
 
